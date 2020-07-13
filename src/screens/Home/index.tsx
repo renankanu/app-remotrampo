@@ -1,5 +1,6 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/Feather';
+import { useNavigation } from '@react-navigation/native';
 import {
   Container,
   Title,
@@ -10,11 +11,17 @@ import {
 import { Spacer } from '../../styles';
 
 const Home: React.FC = () => {
+  const navigation = useNavigation();
+
+  const callJobScren = () => {
+    navigation.navigate('Job');
+  };
+
   return (
     <Container>
       <Title>App RemoTrampo</Title>
       <Spacer height={20} />
-      <ContainerButton11>
+      <ContainerButton11 onPress={callJobScren}>
         <ContainerButton55>
           <ContainerButtonHome>
             <Icon name="arrow-right" size={30} color="#000" />

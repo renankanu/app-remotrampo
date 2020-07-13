@@ -13,7 +13,7 @@ export const Title = styled.Text`
   font-family: 'JosefinSans-Medium';
 `;
 
-export const ContainerButton11 = styled.View`
+export const ContainerButton11 = styled.TouchableOpacity`
   padding: 0px 12px;
   border-radius: 18px;
   background: ${colors.transparent11};
