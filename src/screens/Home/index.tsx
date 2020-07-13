@@ -16,7 +16,7 @@ import home from '../../assets/images/home.png';
 const Home: React.FC = () => {
   const navigation = useNavigation();
 
-  const callJobScren = () => {
+  const callJobScreen = () => {
     navigation.navigate('Job');
   };
 
@@ -28,7 +28,7 @@ const Home: React.FC = () => {
       <Spacer height={60} />
       <Logo source={home} animation="rubberBand" />
       <Spacer height={60} />
-      <ContainerButton11 onPress={callJobScren}>
+      <ContainerButton11 onPress={callJobScreen}>
         <ContainerButton55>
           <ContainerButtonHome>
             <Icon name="arrow-right" size={30} color="#000" />
