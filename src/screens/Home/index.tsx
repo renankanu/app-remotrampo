@@ -4,11 +4,14 @@ import { useNavigation } from '@react-navigation/native';
 import {
   Container,
   Title,
+  Description,
   ContainerButton11,
   ContainerButton55,
   ContainerButtonHome,
+  Logo,
 } from './styles';
 import { Spacer } from '../../styles';
+import home from '../../assets/images/home.png';
 
 const Home: React.FC = () => {
   const navigation = useNavigation();
@@ -19,8 +22,12 @@ const Home: React.FC = () => {
 
   return (
     <Container>
-      <Title>App RemoTrampo</Title>
-      <Spacer height={20} />
+      <Title>RemoTrampo</Title>
+      <Spacer height={10} />
+      <Description>Is the easiest to find a job remotely for you</Description>
+      <Spacer height={60} />
+      <Logo source={home} />
+      <Spacer height={60} />
       <ContainerButton11 onPress={callJobScren}>
         <ContainerButton55>
           <ContainerButtonHome>

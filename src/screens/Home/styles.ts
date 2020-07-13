@@ -13,6 +13,12 @@ export const Title = styled.Text`
   font-family: 'JosefinSans-Medium';
 `;
 
+export const Description = styled.Text`
+  font-size: 18px;
+  color: ${colors.mischka};
+  font-family: 'JosefinSans-Regular';
+`;
+
 export const ContainerButton11 = styled.TouchableOpacity`
   padding: 0px 12px;
   border-radius: 18px;
@@ -32,4 +38,10 @@ export const ContainerButtonHome = styled.View`
   justify-content: center;
   align-items: center;
   background: ${colors.white};
+`;
+
+export const Logo = styled.Image`
+  border-radius: 100px;
+  height: 200px;
+  width: 200px;
 `;
