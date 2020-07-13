@@ -29,5 +29,7 @@ export const ContainerButtonHome = styled.View`
   height: 48px;
   width: 80px;
   border-radius: 18px;
+  justify-content: center;
+  align-items: center;
   background: ${colors.white};
 `;

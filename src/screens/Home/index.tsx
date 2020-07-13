@@ -1,4 +1,5 @@
 import React from 'react';
+import Icon from 'react-native-vector-icons/Feather';
 import {
   Container,
   Title,
@@ -15,7 +16,9 @@ const Home: React.FC = () => {
       <Spacer height={20} />
       <ContainerButton11>
         <ContainerButton55>
-          <ContainerButtonHome />
+          <ContainerButtonHome>
+            <Icon name="arrow-right" size={30} color="#000" />
+          </ContainerButtonHome>
         </ContainerButton55>
       </ContainerButton11>
     </Container>
