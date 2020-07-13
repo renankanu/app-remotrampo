@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import * as Animatable from 'react-native-animatable';
 import colors from '../../styles/colors';
 
 export const Container = styled.View`
@@ -40,7 +41,7 @@ export const ContainerButtonHome = styled.View`
   background: ${colors.white};
 `;
 
-export const Logo = styled.Image`
+export const Logo = styled(Animatable.Image)`
   border-radius: 100px;
   height: 200px;
   width: 200px;

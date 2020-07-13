@@ -26,7 +26,7 @@ const Home: React.FC = () => {
       <Spacer height={10} />
       <Description>Is the easiest to find a job remotely for you</Description>
       <Spacer height={60} />
-      <Logo source={home} />
+      <Logo source={home} animation="rubberBand" />
       <Spacer height={60} />
       <ContainerButton11 onPress={callJobScren}>
         <ContainerButton55>
