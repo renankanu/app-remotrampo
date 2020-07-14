@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useNavigation } from '@react-navigation/native';
@@ -50,9 +50,12 @@ const Job: React.FC = () => {
     requestRemoteJobs();
   }, []);
 
-  const callJobDetails = () => {
-    navigation.navigate('JobDetails');
-  };
+  const callJobDetails = useCallback(
+    (job: Job) => {
+      navigation.navigate('JobDetails', { item: job });
+    },
+    [navigation],
+  );
 
   return (
     <Container>
@@ -64,7 +67,7 @@ const Job: React.FC = () => {
         renderItem={({ item }) => (
           <ContainerJob
             onPress={() => {
-              callJobDetails();
+              callJobDetails(item);
             }}
           >
             <ImageJob
