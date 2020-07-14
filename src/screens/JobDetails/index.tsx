@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import React from 'react';
-import { View, Image } from 'react-native';
+import { Image } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { Container } from './styles';
 import notFound from '../../assets/images/notFound.png';
