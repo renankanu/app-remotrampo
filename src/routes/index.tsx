@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../screens/Home/index';
 import Job from '../screens/Job';
 import JobDetails from '../screens/JobDetails';
-import colors from '../styles/colors';
+import customColors from '../styles/customColors';
 
 const Stack = createStackNavigator();
 
@@ -14,7 +14,7 @@ const Routes: React.FC = () => {
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
-          cardStyle: { backgroundColor: colors.backgroundApp },
+          cardStyle: { backgroundColor: customColors.backgroundApp },
         }}
       >
         <Stack.Screen name="Home" component={Home} />

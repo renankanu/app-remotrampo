@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import * as Animatable from 'react-native-animatable';
-import colors from '../../styles/colors';
+import customColors from '../../styles/colors';
 
 export const Container = styled.View`
   flex: 1;
@@ -10,26 +10,26 @@ export const Container = styled.View`
 
 export const Title = styled.Text`
   font-size: 32px;
-  color: ${colors.mischka};
+  color: ${customColors.mischka};
   font-family: 'JosefinSans-Medium';
 `;
 
 export const Description = styled.Text`
   font-size: 18px;
-  color: ${colors.mischka};
+  color: ${customColors.mischka};
   font-family: 'JosefinSans-Regular';
 `;
 
 export const ContainerButton11 = styled.TouchableOpacity`
   padding: 0px 12px;
   border-radius: 18px;
-  background: ${colors.transparent11};
+  background: ${customColors.transparent11};
 `;
 
 export const ContainerButton55 = styled.View`
   padding: 0px 12px 0px 0px;
   border-radius: 18px;
-  background: ${colors.transparent55};
+  background: ${customColors.transparent55};
 `;
 
 export const ContainerButtonHome = styled.View`
@@ -38,7 +38,7 @@ export const ContainerButtonHome = styled.View`
   border-radius: 18px;
   justify-content: center;
   align-items: center;
-  background: ${colors.white};
+  background: ${customColors.white};
 `;
 
 export const Logo = styled(Animatable.Image)`

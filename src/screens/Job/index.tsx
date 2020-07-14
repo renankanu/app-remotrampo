@@ -1,8 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Container } from './styles';
 
 const Job: React.FC = () => {
-  return <View />;
+  return <Container />;
 };
 
 export default Job;

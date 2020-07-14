@@ -1,4 +1,4 @@
-const colors = {
+const customColors = {
   backgroundApp: '#302A38',
   bastille: '#27212E',
   shipGray: '#413A49',
@@ -10,4 +10,4 @@ const colors = {
   transparent55: '#FFFFFF55',
 };
 
-export default colors;
+export default customColors;

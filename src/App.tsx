@@ -3,13 +3,13 @@ import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'react-native';
 import Routes from './routes/index';
-import colors from './styles/colors';
+import customColors from './styles/customColors';
 
 const App: React.FC = () => (
   <SafeAreaProvider>
     <StatusBar
       barStyle="light-content"
-      backgroundColor={colors.backgroundApp}
+      backgroundColor={customColors.backgroundApp}
     />
     <Routes />
   </SafeAreaProvider>
