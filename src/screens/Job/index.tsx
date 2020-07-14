@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { useNavigation } from '@react-navigation/native';
 import {
   Container,
   ContainerSearch,
@@ -36,6 +37,7 @@ export interface Job {
 
 const Job: React.FC = () => {
   const [jobData, setJobData] = useState<Job[]>([]);
+  const navigation = useNavigation();
   useEffect(() => {
     const requestRemoteJobs = async () => {
       try {
@@ -48,6 +50,10 @@ const Job: React.FC = () => {
     requestRemoteJobs();
   }, []);
 
+  const callJobDetails = () => {
+    navigation.navigate('JobDetails');
+  };
+
   return (
     <Container>
       <ContainerSearch animation="fadeInDown" />
@@ -58,7 +64,7 @@ const Job: React.FC = () => {
         renderItem={({ item }) => (
           <ContainerJob
             onPress={() => {
-              Alert.alert('Clicked');
+              callJobDetails();
             }}
           >
             <ImageJob

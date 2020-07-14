@@ -1,7 +1,7 @@
 const customColors = {
-  backgroundApp: '#102D53',
-  bastille: '#0F1E37',
-  shipGray: '#223E65',
+  backgroundApp: '#302A38',
+  bastille: '#27212E',
+  shipGray: '#413A49',
   carnation: '#FE5158',
   mischka: '#E2DEE7',
   white: '#FFFFFF',
