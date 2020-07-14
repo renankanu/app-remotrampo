@@ -30,10 +30,36 @@ export const ImageJob = styled.Image`
   border-radius: 40px;
 `;
 
+export const ContainerDescJob = styled.View`
+  flex: 1;
+  justify-content: space-between;
+`;
+
+export const RowFlex = styled.View`
+  flex: 1;
+  align-items: center;
+  flex-direction: row;
+`;
+
 export const Title = styled.Text`
+  flex: 1;
   font-size: 16px;
   color: ${customColors.white};
   font-family: 'JosefinSans-Medium';
+`;
+
+export const CompanyName = styled.Text`
+  flex: 1;
+  color: ${customColors.white};
+  font-size: 16px;
+  font-family: 'JosefinSans-Light';
+`;
+
+export const Category = styled.Text`
+  flex: 1;
+  color: ${customColors.white};
+  font-size: 16px;
+  font-family: 'JosefinSans-Light';
 `;
 
 export const JogList = styled(FlatList as new () => FlatList<Job>)``;

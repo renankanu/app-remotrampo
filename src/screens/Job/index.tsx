@@ -1,17 +1,23 @@
 /* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
-import { Text, Image, View } from 'react-native';
+import { Alert } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import {
   Container,
   ContainerSearch,
   JogList,
   ContainerJob,
   ImageJob,
+  ContainerDescJob,
   Title,
+  CompanyName,
+  Category,
+  RowFlex,
 } from './styles';
 import api from '../../services/api';
 import { Spacer } from '../../styles/index';
 import notFound from '../../assets/images/notFound.png';
+import customColors from '../../styles/customColors';
 
 export interface Job {
   id: string;
@@ -36,7 +42,7 @@ const Job: React.FC = () => {
         const response = await api.get('?limit=10');
         setJobData(response.data.jobs);
       } catch (error) {
-        console.log('Error');
+        Alert.alert(error);
       }
     };
     requestRemoteJobs();
@@ -50,7 +56,11 @@ const Job: React.FC = () => {
         data={jobData}
         keyExtractor={job => job.id}
         renderItem={({ item }) => (
-          <ContainerJob onPress={() => {}}>
+          <ContainerJob
+            onPress={() => {
+              Alert.alert('Clicked');
+            }}
+          >
             <ImageJob
               source={
                 item.company_logo_url
@@ -58,9 +68,20 @@ const Job: React.FC = () => {
                   : notFound
               }
             />
-            <View>
-              <Title>{item.title}</Title>
-            </View>
+            <Spacer width={10} />
+            <ContainerDescJob>
+              <Title numberOfLines={1}>{item.title}</Title>
+              <RowFlex>
+                <Icon name="building" size={16} color={customColors.white} />
+                <Spacer width={8} />
+                <CompanyName numberOfLines={1}>{item.company_name}</CompanyName>
+              </RowFlex>
+              <RowFlex>
+                <Icon name="suitcase" size={16} color={customColors.white} />
+                <Spacer width={8} />
+                <Category numberOfLines={1}>{item.category}</Category>
+              </RowFlex>
+            </ContainerDescJob>
           </ContainerJob>
         )}
       />
