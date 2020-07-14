@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import * as Animatable from 'react-native-animatable';
-import customColors from '../../styles/colors';
+import customColors from '../../styles/customColors';
 
 export const Container = styled.View`
   flex: 1;

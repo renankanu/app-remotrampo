@@ -5,12 +5,12 @@ import customColors from '../../styles/customColors';
 
 export const Container = styled(SafeAreaView)`
   flex: 1;
-  align-items: center;
-  justify-content: center;
 `;
 
-export const Title = styled(Animatable.View)`
+export const ContainerSearch = styled(Animatable.View)`
   height: 48px;
+  margin: 20px 20px 0px 20px;
+  border-radius: 12px;
   background: ${customColors.shipGray};
 `;
 
