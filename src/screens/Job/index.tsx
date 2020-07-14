@@ -63,7 +63,7 @@ const Job: React.FC = () => {
       <Spacer height={10} />
       <JogList
         data={jobData}
-        keyExtractor={job => job.id}
+        keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <ContainerJob
             onPress={() => {
