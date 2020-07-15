@@ -1,30 +1,32 @@
+import customColors from '../../styles/customColors';
+
 export const tagsStyles = {
   div: {
-    color: '#FFF',
-    margin: 10,
+    color: customColors.white,
+    marginTop: 10,
   },
   span: {
-    color: '#FFF',
+    color: customColors.white,
   },
   p: {
-    color: '#FFF',
-    margin: 10,
+    color: customColors.white,
+    marginTop: 10,
   },
   h1: {
-    color: '#FFF',
-    margin: 10,
+    color: customColors.white,
+    marginTop: 10,
   },
   h2: {
-    color: '#FFF',
-    margin: 10,
+    color: customColors.white,
+    marginTop: 10,
   },
   li: {
-    color: '#FFF',
+    color: customColors.white,
   },
   ol: {
-    color: '#FFF',
+    color: customColors.white,
   },
   ul: {
-    color: '#FFF',
+    color: customColors.white,
   },
 };
