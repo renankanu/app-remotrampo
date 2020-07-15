@@ -41,7 +41,9 @@
         "ts": "never",
         "tsx": "never"
       }
-    ]
+    ],
+    "camelcase": "off",
+    "no-console": "off"
   },
   "settings": {
     "import/resolver": {

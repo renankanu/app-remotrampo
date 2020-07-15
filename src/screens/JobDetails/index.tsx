@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import React from 'react';
 import { Linking, Dimensions } from 'react-native';
 import { useRoute } from '@react-navigation/native';
