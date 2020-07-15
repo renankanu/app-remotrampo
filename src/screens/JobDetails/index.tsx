@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
 import React from 'react';
+import { Linking, Dimensions } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import HTML from 'react-native-render-html';
-import { IGNORED_TAGS } from 'react-native-render-html/src/HTMLUtils';
-import { Dimensions } from 'react-native';
+
 import {
   Container,
   CompanyImage,
@@ -69,8 +69,6 @@ const JobDetails: React.FC = () => {
   const route = useRoute();
   const job = route.params as RouteParams;
 
-  console.log('-----', job.item.description);
-
   return (
     <ScrollView>
       <Container>
@@ -105,7 +103,14 @@ const JobDetails: React.FC = () => {
             'margin-bottom',
           ]}
           baseFontStyle={{ fontFamily: 'JosefinSans-Light' }}
-          imagesMaxWidth={Dimensions.get('window').width}
+          imagesMaxWidth={Dimensions.get('window').width - 48}
+          onLinkPress={(object, href) => {
+            Linking.canOpenURL(href).then(supported => {
+              if (supported) {
+                Linking.openURL(href);
+              }
+            });
+          }}
         />
         <Spacer height={24} />
       </Container>
