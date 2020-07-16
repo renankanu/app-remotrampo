@@ -1,8 +1,9 @@
 import React from 'react';
 import { Linking, Dimensions } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import HTML from 'react-native-render-html';
 
+import Icon from 'react-native-vector-icons/Feather';
 import {
   Container,
   CompanyImage,
@@ -12,10 +13,15 @@ import {
   ScrollView,
   Row,
   ContainerColumn,
+  Header,
+  BackButton,
+  TitleHeaderContainer,
+  TitleHeader,
 } from './styles';
 import notFound from '../../assets/images/notFound.png';
 import { Spacer } from '../../styles/index';
 import { tagsStyles } from './tagHtmlStyles';
+import customColors from '../../styles/customColors';
 
 interface Job {
   id: string;
@@ -38,6 +44,7 @@ interface RouteParams {
 
 const JobDetails: React.FC = () => {
   const route = useRoute();
+  const navigation = useNavigation();
   const job = route.params as RouteParams;
 
   const verifySalary = () => {
@@ -47,9 +54,21 @@ const JobDetails: React.FC = () => {
     return job.item.salary;
   };
 
+  const callGoBack = () => {
+    navigation.goBack();
+  };
+
   return (
-    <ScrollView>
-      <Container>
+    <Container>
+      <Header>
+        <BackButton onPress={callGoBack}>
+          <Icon name="chevron-left" size={24} color={customColors.white} />
+        </BackButton>
+        <TitleHeaderContainer>
+          <TitleHeader>Job Details</TitleHeader>
+        </TitleHeaderContainer>
+      </Header>
+      <ScrollView>
         <ContainerCenter>
           <CompanyImage
             resizeMode="contain"
@@ -118,8 +137,8 @@ const JobDetails: React.FC = () => {
           }}
         />
         <Spacer height={24} />
-      </Container>
-    </ScrollView>
+      </ScrollView>
+    </Container>
   );
 };
 
