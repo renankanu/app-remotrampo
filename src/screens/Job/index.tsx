@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable camelcase */
 import React, { useEffect, useState, useCallback } from 'react';
 import { Alert } from 'react-native';
@@ -14,6 +15,7 @@ import {
   CompanyName,
   Category,
   RowFlex,
+  InputSearch,
 } from './styles';
 import api from '../../services/api';
 import { Spacer } from '../../styles/index';
@@ -35,20 +37,48 @@ export interface Job {
   company_logo_url: string;
 }
 
+type integer = number;
+
+enum TypeSearch {
+  NONE = 'none',
+  CATEGORY = 'category',
+  TAGS = 'tags',
+  COMPANY_NAME = 'company_name',
+  SEARCH = 'search',
+}
+
 const Job: React.FC = () => {
   const [jobData, setJobData] = useState<Job[]>([]);
+  const [search, setSearch] = useState<string>('');
+  const [typeSearch, setTypeSearch] = useState<TypeSearch>(TypeSearch.NONE);
+  const [limitSearch, setLimitSearch] = useState<integer>(40);
   const navigation = useNavigation();
   useEffect(() => {
-    const requestRemoteJobs = async () => {
-      try {
-        const response = await api.get('?limit=40');
-        setJobData(response.data.jobs);
-      } catch (error) {
-        Alert.alert(error);
-      }
-    };
     requestRemoteJobs();
   }, []);
+
+  const getLimitSearch = useCallback(() => {
+    if (limitSearch > 0) {
+      return `?limit=${limitSearch}`;
+    }
+    return '';
+  }, [limitSearch]);
+
+  const getTypeSearch = useCallback(() => {
+    if (limitSearch > 0) {
+      return `?${typeSearch}=${search}`;
+    }
+    return '';
+  }, [limitSearch]);
+
+  const requestRemoteJobs = useCallback(async () => {
+    try {
+      const response = await api.get(getTypeSearch() + getLimitSearch());
+      setJobData(response.data.jobs);
+    } catch (error) {
+      Alert.alert(error);
+    }
+  }, [getLimitSearch]);
 
   const callJobDetails = useCallback(
     (job: Job) => {
@@ -59,7 +89,15 @@ const Job: React.FC = () => {
 
   return (
     <Container>
-      <ContainerSearch animation="fadeInDown" />
+      <ContainerSearch animation="fadeInDown">
+        <InputSearch
+          returnKeyType="search"
+          onSubmitEditing={() => requestRemoteJobs()}
+          onChangeText={setSearch}
+          value={search}
+          placeholder="What Pokémon are you looking for?"
+        />
+      </ContainerSearch>
       <Spacer height={10} />
       <JogList
         data={jobData}

@@ -11,9 +11,17 @@ export const Container = styled(SafeAreaView)`
 
 export const ContainerSearch = styled(Animatable.View)`
   height: 48px;
-  margin: 20px 20px 0px 20px;
-  border-radius: 12px;
+  flex-direction: row;
+  padding: 0px 27px;
+  margin: 20px 10px 0px 10px;
+  align-items: center;
+  border-radius: 10px;
   background: ${customColors.shipGray};
+`;
+export const InputSearch = styled.TextInput`
+  margin-left: 12px;
+  height: 100%;
+  width: 100%;
 `;
 
 export const ContainerJob = styled.TouchableOpacity`
