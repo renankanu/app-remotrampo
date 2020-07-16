@@ -18,6 +18,7 @@ import {
   BackButton,
   TitleHeaderContainer,
   TitleHeader,
+  Title,
 } from './styles';
 import notFound from '../../assets/images/notFound.png';
 import { Spacer } from '../../styles/index';
@@ -72,6 +73,7 @@ const JobDetails: React.FC = () => {
         <TitleHeaderContainer>
           <TitleHeader>Job Details</TitleHeader>
         </TitleHeaderContainer>
+        <BackButton />
       </Header>
       <ScrollView>
         <ContainerCenter>
@@ -84,9 +86,9 @@ const JobDetails: React.FC = () => {
             }
           />
         </ContainerCenter>
-        <Label>Title</Label>
-        <Info>{job.item.title}</Info>
         <Spacer height={24} />
+        <Title>{job.item.title}</Title>
+        <Spacer height={36} />
         <Row>
           <ContainerColumn>
             <Label>Company Name</Label>

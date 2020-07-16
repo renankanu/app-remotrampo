@@ -48,7 +48,6 @@ export const BackButton = styled.TouchableOpacity`
 export const TitleHeaderContainer = styled.View`
   flex: 1;
   align-items: center;
-  margin-left: -36px;
 `;
 
 export const Label = styled.Text`
@@ -59,6 +58,13 @@ export const Label = styled.Text`
 
 export const TitleHeader = styled.Text`
   font-size: 24px;
+  color: ${customColors.mischka};
+  font-family: 'JosefinSans-Medium';
+`;
+
+export const Title = styled.Text`
+  text-align: center;
+  font-size: 36px;
   color: ${customColors.mischka};
   font-family: 'JosefinSans-Medium';
 `;
