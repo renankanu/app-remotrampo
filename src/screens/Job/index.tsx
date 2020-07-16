@@ -41,7 +41,7 @@ const Job: React.FC = () => {
   useEffect(() => {
     const requestRemoteJobs = async () => {
       try {
-        const response = await api.get('?limit=10');
+        const response = await api.get('?limit=40');
         setJobData(response.data.jobs);
       } catch (error) {
         Alert.alert(error);

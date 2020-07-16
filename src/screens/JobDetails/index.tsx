@@ -49,6 +49,8 @@ const JobDetails: React.FC = () => {
   const navigation = useNavigation();
   const job = route.params as RouteParams;
 
+  console.log('-----', job.item.description);
+
   const verifySalary = () => {
     if (job.item.salary === '') {
       return 'Uninformed';
@@ -132,6 +134,7 @@ const JobDetails: React.FC = () => {
             'color',
             'margin-top',
             'margin-bottom',
+            'background-color',
           ]}
           baseFontStyle={{ fontFamily: 'JosefinSans-Light' }}
           imagesMaxWidth={Dimensions.get('window').width - 48}
