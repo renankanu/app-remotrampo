@@ -76,11 +76,11 @@ const JobDetails: React.FC = () => {
         <Spacer height={24} />
         <Row>
           <ContainerColumn>
-            <Label>Company Name</Label>
+            <Label>Type</Label>
             <Info>{job.item.job_type}</Info>
           </ContainerColumn>
           <ContainerColumn>
-            <Label>category</Label>
+            <Label>Publication Date</Label>
             <Info>{job.item.publication_date}</Info>
           </ContainerColumn>
         </Row>
