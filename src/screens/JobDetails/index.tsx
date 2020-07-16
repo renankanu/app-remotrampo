@@ -2,6 +2,7 @@ import React from 'react';
 import { Linking, Dimensions } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import HTML from 'react-native-render-html';
+import moment from 'moment';
 
 import Icon from 'react-native-vector-icons/Feather';
 import {
@@ -54,6 +55,10 @@ const JobDetails: React.FC = () => {
     return job.item.salary;
   };
 
+  const formatDate = () => {
+    return moment(job.item.publication_date).format('YYYY-MM-DD');
+  };
+
   const callGoBack = () => {
     navigation.goBack();
   };
@@ -100,7 +105,7 @@ const JobDetails: React.FC = () => {
           </ContainerColumn>
           <ContainerColumn>
             <Label>Publication Date</Label>
-            <Info>{job.item.publication_date}</Info>
+            <Info>{formatDate()}</Info>
           </ContainerColumn>
         </Row>
         <Spacer height={24} />
