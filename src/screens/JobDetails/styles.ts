@@ -23,6 +23,15 @@ export const CompanyImage = styled.Image`
   border-radius: 260px;
 `;
 
+export const Row = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const ContainerColumn = styled.View`
+  width: 48%;
+`;
+
 export const Label = styled.Text`
   color: ${customColors.mischka};
   font-family: 'JosefinSans-Light';

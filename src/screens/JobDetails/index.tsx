@@ -10,6 +10,8 @@ import {
   Label,
   Info,
   ScrollView,
+  Row,
+  ContainerColumn,
 } from './styles';
 import notFound from '../../assets/images/notFound.png';
 import { Spacer } from '../../styles/index';
@@ -38,6 +40,13 @@ const JobDetails: React.FC = () => {
   const route = useRoute();
   const job = route.params as RouteParams;
 
+  const verifySalary = () => {
+    if (job.item.salary === '') {
+      return 'Uninformed';
+    }
+    return job.item.salary;
+  };
+
   return (
     <ScrollView>
       <Container>
@@ -54,11 +63,38 @@ const JobDetails: React.FC = () => {
         <Label>Title</Label>
         <Info>{job.item.title}</Info>
         <Spacer height={24} />
-        <Label>Company Name</Label>
-        <Info>{job.item.company_name}</Info>
+        <Row>
+          <ContainerColumn>
+            <Label>Company Name</Label>
+            <Info>{job.item.company_name}</Info>
+          </ContainerColumn>
+          <ContainerColumn>
+            <Label>category</Label>
+            <Info>{job.item.category}</Info>
+          </ContainerColumn>
+        </Row>
         <Spacer height={24} />
-        <Label>category</Label>
-        <Info>{job.item.category}</Info>
+        <Row>
+          <ContainerColumn>
+            <Label>Company Name</Label>
+            <Info>{job.item.job_type}</Info>
+          </ContainerColumn>
+          <ContainerColumn>
+            <Label>category</Label>
+            <Info>{job.item.publication_date}</Info>
+          </ContainerColumn>
+        </Row>
+        <Spacer height={24} />
+        <Row>
+          <ContainerColumn>
+            <Label>Location</Label>
+            <Info>{job.item.candidate_required_location}</Info>
+          </ContainerColumn>
+          <ContainerColumn>
+            <Label>Salary</Label>
+            <Info>{verifySalary()}</Info>
+          </ContainerColumn>
+        </Row>
         <Spacer height={24} />
         <Label>Description</Label>
         <HTML
