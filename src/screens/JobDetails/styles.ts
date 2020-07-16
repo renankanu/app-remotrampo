@@ -24,6 +24,7 @@ export const CompanyImage = styled.Image`
 `;
 
 export const Row = styled.View`
+  flex: 1;
   flex-direction: row;
   align-items: center;
 `;
@@ -65,6 +66,39 @@ export const TitleHeader = styled.Text`
 export const Title = styled.Text`
   text-align: center;
   font-size: 36px;
+  color: ${customColors.mischka};
+  font-family: 'JosefinSans-Medium';
+`;
+
+export const Button = styled.TouchableOpacity`
+  background: ${customColors.carnation};
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 48px;
+`;
+
+export const LabelButton = styled.Text`
+  text-align: center;
+  font-size: 16px;
+  letter-spacing: 3px;
+  color: ${customColors.mischka};
+  font-family: 'JosefinSans-Medium';
+`;
+
+export const Tag = styled.View`
+  margin-top: 8px;
+  padding: 5px 15px;
+  align-self: baseline;
+  border-radius: 30px;
+  background: ${customColors.shipGray};
+`;
+
+export const TagLabel = styled.Text`
+  margin-bottom: ${Platform.OS === 'android' ? '4px' : '0px'};
+  text-align: center;
+  letter-spacing: 3px;
   color: ${customColors.mischka};
   font-family: 'JosefinSans-Medium';
 `;

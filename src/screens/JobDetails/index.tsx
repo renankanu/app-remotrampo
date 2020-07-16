@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import { Linking, Dimensions } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
@@ -19,6 +20,10 @@ import {
   TitleHeaderContainer,
   TitleHeader,
   Title,
+  Button,
+  LabelButton,
+  Tag,
+  TagLabel,
 } from './styles';
 import notFound from '../../assets/images/notFound.png';
 import { Spacer } from '../../styles/index';
@@ -48,8 +53,6 @@ const JobDetails: React.FC = () => {
   const route = useRoute();
   const navigation = useNavigation();
   const job = route.params as RouteParams;
-
-  console.log('-----', job.item.description);
 
   const verifySalary = () => {
     if (job.item.salary === '') {
@@ -124,6 +127,19 @@ const JobDetails: React.FC = () => {
           </ContainerColumn>
         </Row>
         <Spacer height={24} />
+        {job.item.tags.length > 0 && (
+          <>
+            <Label>Tag</Label>
+            {job.item.tags.map((tag, i) => {
+              return (
+                <Tag key={i}>
+                  <TagLabel>{tag}</TagLabel>
+                </Tag>
+              );
+            })}
+          </>
+        )}
+        <Spacer height={24} />
         <Label>Description</Label>
         <HTML
           html={job.item.description}
@@ -146,6 +162,20 @@ const JobDetails: React.FC = () => {
             });
           }}
         />
+        <Spacer height={24} />
+        <Button>
+          <LabelButton
+            onPress={() => {
+              Linking.canOpenURL(job.item.url).then(supported => {
+                if (supported) {
+                  Linking.openURL(job.item.url);
+                }
+              });
+            }}
+          >
+            See Job
+          </LabelButton>
+        </Button>
         <Spacer height={24} />
       </ScrollView>
     </Container>
