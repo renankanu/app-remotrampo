@@ -37,8 +37,6 @@ export interface Job {
   company_logo_url: string;
 }
 
-type integer = number;
-
 enum TypeSearch {
   NONE = 'none',
   CATEGORY = 'category',
@@ -49,36 +47,25 @@ enum TypeSearch {
 
 const Job: React.FC = () => {
   const [jobData, setJobData] = useState<Job[]>([]);
-  const [search, setSearch] = useState<string>('');
+  const [search, setSearch] = useState<string>('front');
   const [typeSearch, setTypeSearch] = useState<TypeSearch>(TypeSearch.NONE);
-  const [limitSearch, setLimitSearch] = useState<integer>(40);
   const navigation = useNavigation();
-  useEffect(() => {
-    requestRemoteJobs();
-  }, []);
-
-  const getLimitSearch = useCallback(() => {
-    if (limitSearch > 0) {
-      return `?limit=${limitSearch}`;
-    }
-    return '';
-  }, [limitSearch]);
 
   const getTypeSearch = useCallback(() => {
-    if (limitSearch > 0) {
+    if (typeSearch !== TypeSearch.NONE && search !== '') {
       return `?${typeSearch}=${search}`;
     }
     return '';
-  }, [limitSearch]);
+  }, [typeSearch, search]);
 
   const requestRemoteJobs = useCallback(async () => {
     try {
-      const response = await api.get(getTypeSearch() + getLimitSearch());
+      const response = await api.get(getTypeSearch());
       setJobData(response.data.jobs);
     } catch (error) {
       Alert.alert(error);
     }
-  }, [getLimitSearch]);
+  }, [getTypeSearch]);
 
   const callJobDetails = useCallback(
     (job: Job) => {
@@ -86,6 +73,10 @@ const Job: React.FC = () => {
     },
     [navigation],
   );
+
+  useEffect(() => {
+    requestRemoteJobs();
+  }, [requestRemoteJobs]);
 
   return (
     <Container>
