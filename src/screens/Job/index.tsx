@@ -1,11 +1,12 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable camelcase */
 import React, { useEffect, useState, useCallback } from 'react';
-import { Alert, View } from 'react-native';
+import { Alert, View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useNavigation } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
 import Modal from 'react-native-modal';
+import Emoji from 'react-native-emoji';
 import {
   Container,
   ContainerSearch,
@@ -20,6 +21,11 @@ import {
   InputSearch,
   Loading,
   ContainerLoading,
+  ContainerOption,
+  ButtonOption,
+  LabelOption,
+  TitleModalOption,
+  ContainerTitleModalOption,
 } from './styles';
 import api from '../../services/api';
 import { Spacer } from '../../styles/index';
@@ -42,18 +48,47 @@ export interface Job {
   company_logo_url: string;
 }
 
+export interface Option {
+  id: number;
+  name: string;
+  isSelected: boolean;
+}
+
 enum TypeSearch {
   NONE = 'none',
   CATEGORY = 'category',
   TAGS = 'tags',
-  COMPANY_NAME = 'company_name',
+  COMPANY_NAME = 'company name',
   SEARCH = 'search',
 }
 
 const Job: React.FC = () => {
   const [jobData, setJobData] = useState<Job[]>([]);
+  const [options, setOptions] = useState<Option[]>([
+    {
+      id: 1,
+      name: TypeSearch.CATEGORY,
+      isSelected: false,
+    },
+    {
+      id: 2,
+      name: TypeSearch.TAGS,
+      isSelected: false,
+    },
+    {
+      id: 3,
+      name: TypeSearch.COMPANY_NAME,
+      isSelected: false,
+    },
+    {
+      id: 4,
+      name: TypeSearch.SEARCH,
+      isSelected: false,
+    },
+  ]);
   const [search, setSearch] = useState<string>('front');
   const [isLoading, setLoading] = useState<boolean>(false);
+  const [isShowModalOption, setIsShowModalOption] = useState<boolean>(false);
   const [typeSearch, setTypeSearch] = useState<TypeSearch>(TypeSearch.NONE);
   const navigation = useNavigation();
 
@@ -82,6 +117,20 @@ const Job: React.FC = () => {
     [navigation],
   );
 
+  const openModalOption = () => {
+    setIsShowModalOption(true);
+  };
+
+  const selectOption = (option: Option) => {
+    const newArrayOptions = options.map(optionItem => {
+      return optionItem.id === option.id
+        ? { ...optionItem, isSelected: true }
+        : { ...optionItem, isSelected: false };
+    });
+    setOptions(newArrayOptions);
+    setIsShowModalOption(false);
+  };
+
   useEffect(() => {
     requestRemoteJobs();
   }, [requestRemoteJobs]);
@@ -91,12 +140,12 @@ const Job: React.FC = () => {
       <Modal
         isVisible={isLoading}
         animationIn="slideInUp"
-        animationOut="bounceOut"
+        animationOut="slideOutDown"
         backdropOpacity={0.5}
-        animationInTiming={1000}
-        animationOutTiming={1000}
-        backdropTransitionInTiming={1000}
-        backdropTransitionOutTiming={1000}
+        animationInTiming={500}
+        animationOutTiming={500}
+        backdropTransitionInTiming={500}
+        backdropTransitionOutTiming={500}
       >
         <ContainerLoading>
           <Loading>
@@ -111,6 +160,45 @@ const Job: React.FC = () => {
         </ContainerLoading>
       </Modal>
 
+      <Modal
+        isVisible={isShowModalOption}
+        animationIn="rubberBand"
+        animationOut="slideOutDown"
+        backdropOpacity={0.5}
+        animationInTiming={500}
+        animationOutTiming={500}
+        backdropTransitionInTiming={500}
+        backdropTransitionOutTiming={500}
+        onSwipeComplete={() => {
+          setIsShowModalOption(false);
+        }}
+        swipeDirection={['down']}
+        style={{ justifyContent: 'flex-end', margin: 0 }}
+      >
+        <ContainerOption>
+          <ContainerTitleModalOption>
+            <TitleModalOption>Filter</TitleModalOption>
+            <Spacer width={8} />
+            <Emoji name="mag_right" style={{ fontSize: 18 }} />
+          </ContainerTitleModalOption>
+          <Spacer height={28} />
+          {options.map(option => {
+            return (
+              <ButtonOption
+                onPress={() => {
+                  selectOption(option);
+                }}
+              >
+                <LabelOption>{option.name}</LabelOption>
+                {option.isSelected && (
+                  <Icon name="check" size={16} color={customColors.white} />
+                )}
+              </ButtonOption>
+            );
+          })}
+        </ContainerOption>
+      </Modal>
+
       <ContainerSearch animation="fadeInDown">
         <InputSearch
           returnKeyType="search"
@@ -119,6 +207,9 @@ const Job: React.FC = () => {
           value={search}
           placeholder="Search Job"
         />
+        <TouchableOpacity onPress={openModalOption}>
+          <Icon name="filter" size={16} color={customColors.white} />
+        </TouchableOpacity>
       </ContainerSearch>
       <Spacer height={10} />
       <JogList
