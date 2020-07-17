@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-use-before-define */
 /* eslint-disable camelcase */
 import React, { useEffect, useState, useCallback } from 'react';
@@ -50,16 +51,16 @@ export interface Job {
 
 export interface Option {
   id: number;
-  name: string;
+  name: TypeSearch;
   isSelected: boolean;
 }
 
 enum TypeSearch {
-  NONE = 'none',
-  CATEGORY = 'category',
-  TAGS = 'tags',
-  COMPANY_NAME = 'company name',
-  SEARCH = 'search',
+  none = 'none',
+  category = 'category',
+  tags = 'tags',
+  company_name = 'company_name',
+  search = 'search',
 }
 
 const Job: React.FC = () => {
@@ -67,33 +68,33 @@ const Job: React.FC = () => {
   const [options, setOptions] = useState<Option[]>([
     {
       id: 1,
-      name: TypeSearch.CATEGORY,
+      name: TypeSearch.category,
       isSelected: false,
     },
     {
       id: 2,
-      name: TypeSearch.TAGS,
+      name: TypeSearch.tags,
       isSelected: false,
     },
     {
       id: 3,
-      name: TypeSearch.COMPANY_NAME,
+      name: TypeSearch.company_name,
       isSelected: false,
     },
     {
       id: 4,
-      name: TypeSearch.SEARCH,
+      name: TypeSearch.search,
       isSelected: false,
     },
   ]);
   const [search, setSearch] = useState<string>('front');
   const [isLoading, setLoading] = useState<boolean>(false);
   const [isShowModalOption, setIsShowModalOption] = useState<boolean>(false);
-  const [typeSearch, setTypeSearch] = useState<TypeSearch>(TypeSearch.NONE);
+  const [typeSearch, setTypeSearch] = useState<TypeSearch>(TypeSearch.none);
   const navigation = useNavigation();
 
   const getTypeSearch = useCallback(() => {
-    if (typeSearch !== TypeSearch.NONE && search !== '') {
+    if (typeSearch !== TypeSearch.none && search !== '') {
       return `?${typeSearch}=${search}`;
     }
     return '';
@@ -121,12 +122,21 @@ const Job: React.FC = () => {
     setIsShowModalOption(true);
   };
 
+  const getTypeOption = (name: string) => {
+    for (const enumTypeSearch in TypeSearch) {
+      if (name === TypeSearch[enumTypeSearch as TypeSearch]) {
+        setTypeSearch(TypeSearch[enumTypeSearch as TypeSearch]);
+      }
+    }
+  };
+
   const selectOption = (option: Option) => {
     const newArrayOptions = options.map(optionItem => {
       return optionItem.id === option.id
         ? { ...optionItem, isSelected: true }
         : { ...optionItem, isSelected: false };
     });
+    getTypeOption(option.name);
     setOptions(newArrayOptions);
     setIsShowModalOption(false);
   };
@@ -134,6 +144,10 @@ const Job: React.FC = () => {
   useEffect(() => {
     requestRemoteJobs();
   }, [requestRemoteJobs]);
+
+  useEffect(() => {
+    console.log('=-=-=-=-=-', typeSearch);
+  }, [typeSearch]);
 
   return (
     <Container>
