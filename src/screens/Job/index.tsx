@@ -1,9 +1,11 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable camelcase */
 import React, { useEffect, useState, useCallback } from 'react';
-import { Alert } from 'react-native';
+import { Alert, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useNavigation } from '@react-navigation/native';
+import LottieView from 'lottie-react-native';
+import Modal from 'react-native-modal';
 import {
   Container,
   ContainerSearch,
@@ -16,11 +18,13 @@ import {
   Category,
   RowFlex,
   InputSearch,
+  ContainerLoading,
 } from './styles';
 import api from '../../services/api';
 import { Spacer } from '../../styles/index';
 import notFound from '../../assets/images/notFound.png';
 import customColors from '../../styles/customColors';
+import loadingLottie from '../../assets/lottie/loading.json';
 
 export interface Job {
   id: string;
@@ -48,6 +52,7 @@ enum TypeSearch {
 const Job: React.FC = () => {
   const [jobData, setJobData] = useState<Job[]>([]);
   const [search, setSearch] = useState<string>('front');
+  const [isLoading, setLoading] = useState<boolean>(false);
   const [typeSearch, setTypeSearch] = useState<TypeSearch>(TypeSearch.NONE);
   const navigation = useNavigation();
 
@@ -59,12 +64,14 @@ const Job: React.FC = () => {
   }, [typeSearch, search]);
 
   const requestRemoteJobs = useCallback(async () => {
+    setLoading(true);
     try {
       const response = await api.get(getTypeSearch());
       setJobData(response.data.jobs);
     } catch (error) {
       Alert.alert(error);
     }
+    setLoading(false);
   }, [getTypeSearch]);
 
   const callJobDetails = useCallback(
@@ -80,13 +87,32 @@ const Job: React.FC = () => {
 
   return (
     <Container>
+      <Modal
+        isVisible={isLoading}
+        animationIn="bounceIn"
+        animationOut="bounceOut"
+        animationInTiming={600}
+        animationOutTiming={600}
+        backdropTransitionInTiming={600}
+        backdropTransitionOutTiming={600}
+      >
+        <ContainerLoading>
+          <LottieView
+            style={{ height: 100, width: 100 }}
+            source={loadingLottie}
+            autoPlay
+            loop
+          />
+        </ContainerLoading>
+      </Modal>
+
       <ContainerSearch animation="fadeInDown">
         <InputSearch
           returnKeyType="search"
           onSubmitEditing={() => requestRemoteJobs()}
           onChangeText={setSearch}
           value={search}
-          placeholder="What Pokémon are you looking for?"
+          placeholder="Search Job"
         />
       </ContainerSearch>
       <Spacer height={10} />
