@@ -18,6 +18,7 @@ import {
   Category,
   RowFlex,
   InputSearch,
+  Loading,
   ContainerLoading,
 } from './styles';
 import api from '../../services/api';
@@ -89,20 +90,24 @@ const Job: React.FC = () => {
     <Container>
       <Modal
         isVisible={isLoading}
-        animationIn="bounceIn"
+        animationIn="slideInUp"
         animationOut="bounceOut"
-        animationInTiming={600}
-        animationOutTiming={600}
-        backdropTransitionInTiming={600}
-        backdropTransitionOutTiming={600}
+        backdropOpacity={0.5}
+        animationInTiming={1000}
+        animationOutTiming={1000}
+        backdropTransitionInTiming={1000}
+        backdropTransitionOutTiming={1000}
       >
         <ContainerLoading>
-          <LottieView
-            style={{ height: 100, width: 100 }}
-            source={loadingLottie}
-            autoPlay
-            loop
-          />
+          <Loading>
+            <LottieView
+              style={{ height: 100, width: 100 }}
+              source={loadingLottie}
+              autoPlay
+              loop
+            />
+            <Title>looking for jobs...</Title>
+          </Loading>
         </ContainerLoading>
       </Modal>
 

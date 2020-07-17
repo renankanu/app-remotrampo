@@ -25,6 +25,14 @@ export const InputSearch = styled.TextInput`
 `;
 
 export const ContainerLoading = styled.View`
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Loading = styled.View`
+  height: 200px;
+  width: 200px;
   background: ${customColors.bastille};
   border-radius: 26px;
   justify-content: center;
