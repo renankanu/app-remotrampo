@@ -1,8 +1,6 @@
 /* eslint-disable no-restricted-syntax */
-/* eslint-disable no-use-before-define */
-/* eslint-disable camelcase */
 import React, { useEffect, useState, useCallback } from 'react';
-import { Alert, View, TouchableOpacity } from 'react-native';
+import { Alert, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useNavigation } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
@@ -56,7 +54,7 @@ export interface Option {
 }
 
 enum TypeSearch {
-  none = 'none',
+  all = 'all',
   category = 'category',
   tags = 'tags',
   company_name = 'company_name',
@@ -66,6 +64,11 @@ enum TypeSearch {
 const Job: React.FC = () => {
   const [jobData, setJobData] = useState<Job[]>([]);
   const [options, setOptions] = useState<Option[]>([
+    {
+      id: 4,
+      name: TypeSearch.all,
+      isSelected: false,
+    },
     {
       id: 1,
       name: TypeSearch.category,
@@ -90,11 +93,11 @@ const Job: React.FC = () => {
   const [search, setSearch] = useState<string>('front');
   const [isLoading, setLoading] = useState<boolean>(false);
   const [isShowModalOption, setIsShowModalOption] = useState<boolean>(false);
-  const [typeSearch, setTypeSearch] = useState<TypeSearch>(TypeSearch.none);
+  const [typeSearch, setTypeSearch] = useState<TypeSearch>(TypeSearch.all);
   const navigation = useNavigation();
 
   const getTypeSearch = useCallback(() => {
-    if (typeSearch !== TypeSearch.none && search !== '') {
+    if (typeSearch !== TypeSearch.all && search !== '') {
       return `?${typeSearch}=${search}`;
     }
     return '';
@@ -144,10 +147,6 @@ const Job: React.FC = () => {
   useEffect(() => {
     requestRemoteJobs();
   }, [requestRemoteJobs]);
-
-  useEffect(() => {
-    console.log('=-=-=-=-=-', typeSearch);
-  }, [typeSearch]);
 
   return (
     <Container>
