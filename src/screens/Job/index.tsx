@@ -65,7 +65,7 @@ const Job: React.FC = () => {
   const [jobData, setJobData] = useState<Job[]>([]);
   const [options, setOptions] = useState<Option[]>([
     {
-      id: 4,
+      id: 5,
       name: TypeSearch.all,
       isSelected: false,
     },
@@ -90,7 +90,7 @@ const Job: React.FC = () => {
       isSelected: false,
     },
   ]);
-  const [search, setSearch] = useState<string>('front');
+  const [search, setSearch] = useState<string>('');
   const [isLoading, setLoading] = useState<boolean>(false);
   const [isShowModalOption, setIsShowModalOption] = useState<boolean>(false);
   const [typeSearch, setTypeSearch] = useState<TypeSearch>(TypeSearch.all);
@@ -112,7 +112,8 @@ const Job: React.FC = () => {
       Alert.alert(error);
     }
     setLoading(false);
-  }, [getTypeSearch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const callJobDetails = useCallback(
     (job: Job) => {
@@ -134,6 +135,7 @@ const Job: React.FC = () => {
   };
 
   const selectOption = (option: Option) => {
+    setIsShowModalOption(false);
     const newArrayOptions = options.map(optionItem => {
       return optionItem.id === option.id
         ? { ...optionItem, isSelected: true }
@@ -141,12 +143,15 @@ const Job: React.FC = () => {
     });
     getTypeOption(option.name);
     setOptions(newArrayOptions);
-    setIsShowModalOption(false);
   };
 
   useEffect(() => {
-    requestRemoteJobs();
-  }, [requestRemoteJobs]);
+    if (typeSearch === TypeSearch.all) {
+      setTimeout(() => {
+        requestRemoteJobs();
+      }, 500);
+    }
+  }, [requestRemoteJobs, typeSearch]);
 
   return (
     <Container>
