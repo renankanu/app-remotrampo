@@ -114,6 +114,10 @@ const Job: React.FC = () => {
       requestRemoteJobs(`?${typeSearch}=${search}`);
       return;
     }
+    if (typeSearch !== TypeSearch.category && search !== '') {
+      requestRemoteJobs(`?${typeSearch}=${search}`);
+      return;
+    }
     requestRemoteJobs(``);
   }, [typeSearch, search, requestRemoteJobs]);
 
