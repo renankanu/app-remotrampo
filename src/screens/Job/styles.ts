@@ -23,21 +23,6 @@ export const InputSearch = styled.TextInput`
   width: 100%;
 `;
 
-export const ContainerLoading = styled.View`
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const Loading = styled.View`
-  height: 200px;
-  width: 200px;
-  background: ${customColors.bastille};
-  border-radius: 26px;
-  justify-content: center;
-  align-items: center;
-`;
-
 export const ContainerJob = styled.TouchableOpacity`
   margin: 0px 10px 10px 10px;
   flex-direction: row;

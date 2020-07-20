@@ -3,7 +3,6 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Alert, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useNavigation } from '@react-navigation/native';
-import LottieView from 'lottie-react-native';
 import Modal from 'react-native-modal';
 import Emoji from 'react-native-emoji';
 import {
@@ -18,8 +17,6 @@ import {
   Category,
   RowFlex,
   InputSearch,
-  Loading,
-  ContainerLoading,
   ContainerOption,
   ButtonOption,
   LabelOption,
@@ -30,7 +27,7 @@ import api from '../../services/api';
 import { Spacer } from '../../styles/index';
 import notFound from '../../assets/images/notFound.png';
 import customColors from '../../styles/customColors';
-import loadingLottie from '../../assets/lottie/loading.json';
+import ModalLoading from './components/ModalLoading/index';
 
 export interface Job {
   id: string;
@@ -160,28 +157,7 @@ const Job: React.FC = () => {
 
   return (
     <Container>
-      <Modal
-        isVisible={isLoading}
-        animationIn="slideInUp"
-        animationOut="slideOutDown"
-        backdropOpacity={0.5}
-        animationInTiming={500}
-        animationOutTiming={500}
-        backdropTransitionInTiming={500}
-        backdropTransitionOutTiming={500}
-      >
-        <ContainerLoading>
-          <Loading>
-            <LottieView
-              style={{ height: 100, width: 100 }}
-              source={loadingLottie}
-              autoPlay
-              loop
-            />
-            <Title>looking for jobs...</Title>
-          </Loading>
-        </ContainerLoading>
-      </Modal>
+      <ModalLoading isLoading={isLoading} />
 
       <Modal
         isVisible={isShowModalOption}
