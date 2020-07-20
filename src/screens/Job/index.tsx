@@ -28,6 +28,7 @@ import { Spacer } from '../../styles/index';
 import notFound from '../../assets/images/notFound.png';
 import customColors from '../../styles/customColors';
 import ModalLoading from './components/ModalLoading/index';
+import ModalOptions from './components/ModalOptions/index';
 
 export interface Job {
   id: string;
@@ -136,7 +137,7 @@ const Job: React.FC = () => {
     }
   };
 
-  const selectOption = (option: Option) => {
+  const selectOption = () => {
     setIsShowModalOption(false);
     const newArrayOptions = options.map(optionItem => {
       return optionItem.id === option.id
@@ -158,45 +159,16 @@ const Job: React.FC = () => {
   return (
     <Container>
       <ModalLoading isLoading={isLoading} />
-
-      <Modal
-        isVisible={isShowModalOption}
-        animationIn="rubberBand"
-        animationOut="slideOutDown"
-        backdropOpacity={0.5}
-        animationInTiming={500}
-        animationOutTiming={500}
-        backdropTransitionInTiming={500}
-        backdropTransitionOutTiming={500}
-        onSwipeComplete={() => {
+      <ModalOptions
+        isShowModalOption={isShowModalOption}
+        doClose={() => {
           setIsShowModalOption(false);
         }}
-        swipeDirection={['down']}
-        style={{ justifyContent: 'flex-end', margin: 0 }}
-      >
-        <ContainerOption>
-          <ContainerTitleModalOption>
-            <TitleModalOption>Filter</TitleModalOption>
-            <Spacer width={8} />
-            <Emoji name="mag_right" style={{ fontSize: 18 }} />
-          </ContainerTitleModalOption>
-          <Spacer height={28} />
-          {options.map(option => {
-            return (
-              <ButtonOption
-                onPress={() => {
-                  selectOption(option);
-                }}
-              >
-                <LabelOption>{option.name}</LabelOption>
-                {option.isSelected && (
-                  <Icon name="check" size={16} color={customColors.white} />
-                )}
-              </ButtonOption>
-            );
-          })}
-        </ContainerOption>
-      </Modal>
+        options={options}
+        onPress={() => {
+          selectOption();
+        }}
+      />
 
       <ContainerSearch animation="fadeInDown">
         <InputSearch
