@@ -96,24 +96,26 @@ const Job: React.FC = () => {
   const [typeSearch, setTypeSearch] = useState<TypeSearch>(TypeSearch.all);
   const navigation = useNavigation();
 
-  const getTypeSearch = useCallback(() => {
-    if (typeSearch !== TypeSearch.all && search !== '') {
-      return `?${typeSearch}=${search}`;
-    }
-    return '';
-  }, [typeSearch, search]);
-
-  const requestRemoteJobs = useCallback(async () => {
+  const requestRemoteJobs = useCallback(async params => {
     setLoading(true);
     try {
-      const response = await api.get(getTypeSearch());
+      const response = await api.get(`${params}`);
       setJobData(response.data.jobs);
     } catch (error) {
       Alert.alert(error);
     }
     setLoading(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const validTypeSearch = useCallback(() => {
+    console.log('TypeSearch', typeSearch);
+    console.log('Search', search);
+    if (typeSearch !== TypeSearch.all && search !== '') {
+      requestRemoteJobs(`?${typeSearch}=${search}`);
+      return;
+    }
+    requestRemoteJobs(``);
+  }, [typeSearch, search, requestRemoteJobs]);
 
   const callJobDetails = useCallback(
     (job: Job) => {
@@ -148,7 +150,7 @@ const Job: React.FC = () => {
   useEffect(() => {
     if (typeSearch === TypeSearch.all) {
       setTimeout(() => {
-        requestRemoteJobs();
+        requestRemoteJobs('');
       }, 500);
     }
   }, [requestRemoteJobs, typeSearch]);
@@ -220,8 +222,13 @@ const Job: React.FC = () => {
       <ContainerSearch animation="fadeInDown">
         <InputSearch
           returnKeyType="search"
-          onSubmitEditing={() => requestRemoteJobs()}
-          onChangeText={setSearch}
+          onSubmitEditing={validTypeSearch}
+          onChangeText={text => {
+            console.log(text);
+            setSearch(text);
+          }}
+          selectionColor={customColors.white}
+          placeholderTextColor={customColors.mischka}
           value={search}
           placeholder="Search Job"
         />
