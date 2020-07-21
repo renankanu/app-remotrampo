@@ -29,6 +29,8 @@ import notFound from '../../assets/images/notFound.png';
 import customColors from '../../styles/customColors';
 import ModalLoading from './components/ModalLoading/index';
 import ModalOptions from './components/ModalOptions/index';
+import {updateOption} from '../../store/modules/option/actions';
+import { useDispatch } from 'react-redux';
 
 export interface Job {
   id: string;
@@ -60,6 +62,7 @@ enum TypeSearch {
 }
 
 const Job: React.FC = () => {
+  const dispatch = useDispatch()
   const [jobData, setJobData] = useState<Job[]>([]);
   const [options, setOptions] = useState<Option[]>([
     {
@@ -139,13 +142,9 @@ const Job: React.FC = () => {
 
   const selectOption = () => {
     setIsShowModalOption(false);
-    const newArrayOptions = options.map(optionItem => {
-      return optionItem.id === option.id
-        ? { ...optionItem, isSelected: true }
-        : { ...optionItem, isSelected: false };
-    });
-    getTypeOption(option.name);
-    setOptions(newArrayOptions);
+    dispatch(updateOption(1))
+    getTypeOption('option.name');
+    // setOptions(newArrayOptions);
   };
 
   useEffect(() => {
@@ -165,9 +164,7 @@ const Job: React.FC = () => {
           setIsShowModalOption(false);
         }}
         options={options}
-        onPress={() => {
-          selectOption();
-        }}
+        onPress={selectOption}
       />
 
       <ContainerSearch animation="fadeInDown">
