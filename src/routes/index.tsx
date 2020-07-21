@@ -7,7 +7,7 @@ import JobDetails from '../screens/JobDetails';
 import customColors from '../styles/customColors';
 import { Provider } from 'react-redux';
 import {createStore} from 'redux';
-import rootReducer from '../store/rootReducer';
+import rootReducer from '../store/modules/rootReducer';
 
 const Stack = createStackNavigator();
 const store = createStore(rootReducer)

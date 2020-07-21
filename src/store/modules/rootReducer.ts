@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import {optionReducer} from './modules/option/reducer';
+import options from './option/reducer';
 
 export default combineReducers({
-  optionReducer,
+  options,
 });

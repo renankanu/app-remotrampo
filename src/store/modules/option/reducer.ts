@@ -1,13 +1,13 @@
 import produce from 'immer';
 import {
-  UpdateOption,
-  OptionState,
+  optionsActionTypes,
+  optionState,
   TypeSearch,
   SELECT_OPTION,
 } from './types';
 
-const initialState: OptionState = {
-  data: [
+const INITIAL_STATE: optionState = {
+  options: [
     {
       id: 5,
       name: TypeSearch.all,
@@ -36,14 +36,14 @@ const initialState: OptionState = {
   ],
 };
 
-export const optionReducer = (
-  state = initialState,
-  action: UpdateOption,
-): OptionState => {
+export default function  optionReducer (
+  state = INITIAL_STATE,
+  action: optionsActionTypes,
+): optionState {
   return produce(state, draft => {
     switch (action.type) {
       case SELECT_OPTION: {
-        draft.data = draft.data.map(option => {
+        draft.options = draft.options.map(option => {
           return option.id === action.payload.id
             ? { ...option, isSelected: true }
             : { ...option, isSelected: false };

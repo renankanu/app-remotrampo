@@ -30,7 +30,8 @@ import customColors from '../../styles/customColors';
 import ModalLoading from './components/ModalLoading/index';
 import ModalOptions from './components/ModalOptions/index';
 import {updateOption} from '../../store/modules/option/actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { optionState } from 'src/store/modules/option/types';
 
 export interface Job {
   id: string;
@@ -63,6 +64,8 @@ enum TypeSearch {
 
 const Job: React.FC = () => {
   const dispatch = useDispatch()
+  const selectIsOn = (state: optionState) => state.options
+  const optionss = useSelector(selectIsOn);
   const [jobData, setJobData] = useState<Job[]>([]);
   const [options, setOptions] = useState<Option[]>([
     {
@@ -141,7 +144,7 @@ const Job: React.FC = () => {
   };
 
   const selectOption = () => {
-    setIsShowModalOption(false);
+    // setIsShowModalOption(false);
     dispatch(updateOption(1))
     getTypeOption('option.name');
     // setOptions(newArrayOptions);
@@ -154,6 +157,10 @@ const Job: React.FC = () => {
       }, 500);
     }
   }, [requestRemoteJobs, typeSearch]);
+
+  useEffect(()=>{
+    console.log('------', optionss)
+  },[optionss])
 
   return (
     <Container>

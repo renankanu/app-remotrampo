@@ -4,8 +4,8 @@ export interface Option {
   isSelected: boolean;
 }
 
-export interface OptionState {
-  data: Option[];
+export interface optionState {
+  options: Option[];
 }
 
 export enum TypeSearch {
@@ -18,7 +18,10 @@ export enum TypeSearch {
 
 export const SELECT_OPTION = '@option/SELECT_OPTION';
 
-export interface UpdateOption {
+export interface updateOption {
   type: typeof SELECT_OPTION;
   payload: { id: number };
 }
+
+export type optionsActionTypes =
+  | updateOption;
