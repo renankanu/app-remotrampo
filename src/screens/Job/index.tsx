@@ -26,6 +26,7 @@ import ModalLoading from './components/ModalLoading/index';
 import ModalOptions from './components/ModalOptions/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { optionState } from 'src/store/modules/option/types';
+import ModalCategories from './components/ModalCategories';
 
 export interface Job {
   id: string;
@@ -42,8 +43,8 @@ export interface Job {
   company_logo_url: string;
 }
 
-interface Category {
-  id: string;
+export interface Category {
+  id: number;
   name: string;
   slug: string;
   isSelected: boolean;
@@ -68,10 +69,14 @@ const Job: React.FC = () => {
     ({ options: state }: { options: optionState }) => state.options
   );
   const [jobData, setJobData] = useState<Job[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<Category[]>([{id:19,
+    name:'Software Development',
+    slug:'software-dev',
+  isSelected: false}]);
   const [search, setSearch] = useState<string>('');
   const [isLoading, setLoading] = useState<boolean>(false);
   const [isShowModalOption, setIsShowModalOption] = useState<boolean>(false);
+  const [isShowModalCategory, setIsShowModalCategory] = useState<boolean>(true);
   const [typeSearch, setTypeSearch] = useState<TypeSearch>(TypeSearch.all);
   const navigation = useNavigation();
 
@@ -91,6 +96,7 @@ const Job: React.FC = () => {
     try {
       const response = await api.get(`/categories`);
       setCategories(response.data.jobs);
+      setIsShowModalCategory(true);
     } catch (error) {
       Alert.alert(error);
     }
@@ -138,6 +144,7 @@ const Job: React.FC = () => {
     if (typeSearch === TypeSearch.all) {
       setTimeout(() => {
         requestRemoteJobs('');
+        requestCategories();
       }, 500);
     }
   }, [requestRemoteJobs, typeSearch]);
@@ -161,6 +168,7 @@ const Job: React.FC = () => {
         options={options}
         onPress={selectOption}
       />
+      <ModalCategories isLoading={isShowModalCategory} categories={categories} />
 
       <ContainerSearch animation="fadeInDown">
         <InputSearch
