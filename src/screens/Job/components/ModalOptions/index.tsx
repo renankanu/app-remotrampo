@@ -13,6 +13,8 @@ import {
 } from './styles';
 import { Option } from '../../index';
 import customColors from '../../../../styles/customColors';
+import { useDispatch } from 'react-redux';
+import { updateOption } from '../../../../store/modules/option/actions';
 
 interface IProps {
   isShowModalOption: boolean;
@@ -27,8 +29,9 @@ const ModalOptions: React.FC<IProps> = ({
   options,
   onPress,
 }: IProps) => {
+  const dispatch = useDispatch()
   const onSubmit = (option: Option) => {
-    onPress(option);
+    dispatch(updateOption(option.id));
   };
   return (
     <Modal
