@@ -17,11 +17,6 @@ import {
   Category,
   RowFlex,
   InputSearch,
-  ContainerOption,
-  ButtonOption,
-  LabelOption,
-  TitleModalOption,
-  ContainerTitleModalOption,
 } from './styles';
 import api from '../../services/api';
 import { Spacer } from '../../styles/index';
@@ -47,6 +42,13 @@ export interface Job {
   company_logo_url: string;
 }
 
+interface Category {
+  id: string;
+  name: string;
+  slug: string;
+  isSelected: boolean;
+}
+
 export interface Option {
   id: number;
   name: TypeSearch;
@@ -66,6 +68,7 @@ const Job: React.FC = () => {
     ({ options: state }: { options: optionState }) => state.options
   );
   const [jobData, setJobData] = useState<Job[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [search, setSearch] = useState<string>('');
   const [isLoading, setLoading] = useState<boolean>(false);
   const [isShowModalOption, setIsShowModalOption] = useState<boolean>(false);
@@ -83,6 +86,17 @@ const Job: React.FC = () => {
     setLoading(false);
   }, []);
 
+  const requestCategories = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await api.get(`/categories`);
+      setCategories(response.data.jobs);
+    } catch (error) {
+      Alert.alert(error);
+    }
+    setLoading(false);
+  }, []);
+
   const validTypeSearch = useCallback(() => {
     console.log('TypeSearch', typeSearch);
     console.log('Search', search);
@@ -91,7 +105,7 @@ const Job: React.FC = () => {
       return;
     }
     if (typeSearch === TypeSearch.category && search !== '') {
-      console.log('0asd09asd90a8da0s9d8a90d8a09d8ad90a8')
+      requestCategories();
       return;
     }
     requestRemoteJobs(``);
