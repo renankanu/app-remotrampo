@@ -64,36 +64,39 @@ enum TypeSearch {
 
 const Job: React.FC = () => {
   const dispatch = useDispatch()
-  const selectIsOn = (state: optionState) => state.options
-  const optionss = useSelector(selectIsOn);
+  // const selectIsOn = (state: optionState) => state.options
+  // const optionss = useSelector(selectIsOn);
+  const options = useSelector(
+    ({ options: state }: { options: optionState }) => state.options
+  );
   const [jobData, setJobData] = useState<Job[]>([]);
-  const [options, setOptions] = useState<Option[]>([
-    {
-      id: 5,
-      name: TypeSearch.all,
-      isSelected: false,
-    },
-    {
-      id: 1,
-      name: TypeSearch.category,
-      isSelected: false,
-    },
-    {
-      id: 2,
-      name: TypeSearch.tags,
-      isSelected: false,
-    },
-    {
-      id: 3,
-      name: TypeSearch.company_name,
-      isSelected: false,
-    },
-    {
-      id: 4,
-      name: TypeSearch.search,
-      isSelected: false,
-    },
-  ]);
+  // const [options, setOptions] = useState<Option[]>([
+  //   {
+  //     id: 5,
+  //     name: TypeSearch.all,
+  //     isSelected: false,
+  //   },
+  //   {
+  //     id: 1,
+  //     name: TypeSearch.category,
+  //     isSelected: false,
+  //   },
+  //   {
+  //     id: 2,
+  //     name: TypeSearch.tags,
+  //     isSelected: false,
+  //   },
+  //   {
+  //     id: 3,
+  //     name: TypeSearch.company_name,
+  //     isSelected: false,
+  //   },
+  //   {
+  //     id: 4,
+  //     name: TypeSearch.search,
+  //     isSelected: false,
+  //   },
+  // ]);
   const [search, setSearch] = useState<string>('');
   const [isLoading, setLoading] = useState<boolean>(false);
   const [isShowModalOption, setIsShowModalOption] = useState<boolean>(false);
@@ -159,8 +162,8 @@ const Job: React.FC = () => {
   }, [requestRemoteJobs, typeSearch]);
 
   useEffect(()=>{
-    console.log('------', optionss)
-  },[optionss])
+    console.log('------', options)
+  },[options])
 
   return (
     <Container>
