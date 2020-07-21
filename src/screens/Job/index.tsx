@@ -86,11 +86,12 @@ const Job: React.FC = () => {
   const validTypeSearch = useCallback(() => {
     console.log('TypeSearch', typeSearch);
     console.log('Search', search);
-    if (typeSearch !== TypeSearch.all && search !== '') {
-      requestRemoteJobs(`?${typeSearch}=${search}`);
+    if (typeSearch === TypeSearch.all) {
+      requestRemoteJobs(``);
       return;
     }
-    if (typeSearch !== TypeSearch.category && search !== '') {
+    if (typeSearch === TypeSearch.category && search !== '') {
+      console.log('0asd09asd90a8da0s9d8a90d8a09d8ad90a8')
       return;
     }
     requestRemoteJobs(``);
