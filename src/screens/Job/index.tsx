@@ -27,6 +27,7 @@ import ModalOptions from './components/ModalOptions/index';
 import { useDispatch, useSelector } from 'react-redux';
 import { optionState } from 'src/store/modules/option/types';
 import ModalCategories from './components/ModalCategories';
+import { categoryState } from '../../store/modules/category/types';
 
 export interface Job {
   id: string;
@@ -68,6 +69,9 @@ const Job: React.FC = () => {
   const options = useSelector(
     ({ options: state }: { options: optionState }) => state.options
   );
+  const category = useSelector(
+    ({ category: state }: { category: categoryState }) => state.category
+  );
   const [jobData, setJobData] = useState<Job[]>([]);
   const [categories, setCategories] = useState<Category[]>([{id:19,
     name:'Software Development',
@@ -76,7 +80,7 @@ const Job: React.FC = () => {
   const [search, setSearch] = useState<string>('');
   const [isLoading, setLoading] = useState<boolean>(false);
   const [isShowModalOption, setIsShowModalOption] = useState<boolean>(false);
-  const [isShowModalCategory, setIsShowModalCategory] = useState<boolean>(true);
+  const [isShowModalCategory, setIsShowModalCategory] = useState<boolean>(false);
   const [typeSearch, setTypeSearch] = useState<TypeSearch>(TypeSearch.all);
   const navigation = useNavigation();
 
@@ -103,7 +107,7 @@ const Job: React.FC = () => {
     setLoading(false);
   }, []);
 
-  const validTypeSearch = useCallback(() => {
+  const callRequest = useCallback(() => {
     console.log('TypeSearch', typeSearch);
     console.log('Search', search);
     if (typeSearch === TypeSearch.all) {
@@ -149,13 +153,28 @@ const Job: React.FC = () => {
     }
   }, [requestRemoteJobs, typeSearch]);
 
+  const validOptionSelected = (option: string | undefined) => {
+    console.log('-----', option)
+    if(option === 'category'){
+      setTimeout(()=>{
+        setIsShowModalCategory(true)
+      },1000)
+    }
+  }
+
   useEffect(()=>{
     const option = options.find(option => {
       return option.isSelected
     })
     setIsShowModalOption(false);
     getTypeOption(option?.name);
+    validOptionSelected(option?.name)
   },[options])
+
+  useEffect(()=>{
+    setIsShowModalCategory(false)
+    console.log('000000', category)
+  },[category])
 
   return (
     <Container>
@@ -173,7 +192,7 @@ const Job: React.FC = () => {
       <ContainerSearch animation="fadeInDown">
         <InputSearch
           returnKeyType="search"
-          onSubmitEditing={validTypeSearch}
+          onSubmitEditing={callRequest}
           onChangeText={text => {
             console.log(text);
             setSearch(text);

@@ -1,8 +1,10 @@
 import React from 'react'
 import Modal from 'react-native-modal';
 import {Category} from '../../index'
-import { Container, Label, Title } from './styles';
+import { Container, Label, Title, ButtonSelect } from './styles';
+import { useDispatch } from 'react-redux';
 import { Spacer } from '../../../../styles';
+import { setCategory } from '../../../../store/modules/category/actions';
 
 interface IProps {
   isLoading: boolean;
@@ -10,30 +12,34 @@ interface IProps {
 }
 
 const ModalCategories: React.FC<IProps> = ({isLoading, categories}: IProps) => {
-  console.log('---', categories)
+  const dispatch = useDispatch()
   return (
     <Modal
-      isVisible
-      animationIn="slideInUp"
-      animationOut="slideOutDown"
-      backdropOpacity={0.5}
-      animationInTiming={500}
-      animationOutTiming={500}
-      backdropTransitionInTiming={500}
-      backdropTransitionOutTiming={500}
+    isVisible={isLoading}
+    animationIn="slideInUp"
+    animationOut="slideOutDown"
+    backdropOpacity={0.5}
+    animationInTiming={500}
+    animationOutTiming={500}
+    backdropTransitionInTiming={500}
+    backdropTransitionOutTiming={500}
     >
-      <Container>
-        <Title>Choose category</Title>
-        <Spacer height={20}/>
-        {categories.map(category => {
-          return(<>
-          <Label>{category.name}</Label>
-          <Spacer height={12}/>
-          </>)
-        })}
+    <Container>
+    <Title>Choose category</Title>
+    <Spacer height={20}/>
+    {categories.map(category => {
+      return(
+        <ButtonSelect onPress={()=>{
+          dispatch(setCategory(category.slug))
+        }}>
+        <Label>{category.name}</Label>
+        <Spacer height={12}/>
+        </ButtonSelect>
+        )
+      })}
       </Container>
-    </Modal>
-  )
-}
+      </Modal>
+      )
+    }
 
-export default ModalCategories
+    export default ModalCategories
