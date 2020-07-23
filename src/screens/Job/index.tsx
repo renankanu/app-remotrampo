@@ -73,10 +73,7 @@ const Job: React.FC = () => {
     ({ category: state }: { category: categoryState }) => state.category
   );
   const [jobData, setJobData] = useState<Job[]>([]);
-  const [categories, setCategories] = useState<Category[]>([{id:19,
-    name:'Software Development',
-    slug:'software-dev',
-  isSelected: false}]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [search, setSearch] = useState<string>('');
   const [isLoading, setLoading] = useState<boolean>(false);
   const [isShowModalOption, setIsShowModalOption] = useState<boolean>(false);
@@ -96,29 +93,25 @@ const Job: React.FC = () => {
   }, []);
 
   const requestCategories = useCallback(async () => {
-    setLoading(true);
     try {
       const response = await api.get(`/categories`);
       setCategories(response.data.jobs);
-      setIsShowModalCategory(true);
     } catch (error) {
       Alert.alert(error);
     }
-    setLoading(false);
   }, []);
 
-  const callRequest = useCallback(() => {
+  const callRequest = useCallback(async () => {
     console.log('TypeSearch', typeSearch);
     console.log('Search', search);
     if (typeSearch === TypeSearch.all) {
-      requestRemoteJobs(``);
+      await requestRemoteJobs(``);
       return;
     }
     if (typeSearch === TypeSearch.category && search !== '') {
-      requestCategories();
       return;
     }
-    requestRemoteJobs(``);
+    await requestRemoteJobs(``);
   }, [typeSearch, search, requestRemoteJobs]);
 
   const callJobDetails = useCallback(
@@ -148,17 +141,21 @@ const Job: React.FC = () => {
     if (typeSearch === TypeSearch.all) {
       setTimeout(() => {
         requestRemoteJobs('');
-        requestCategories();
       }, 500);
     }
   }, [requestRemoteJobs, typeSearch]);
 
+  useEffect(() => {
+    requestCategories()
+  }, [requestCategories]);
+
   const validOptionSelected = (option: string | undefined) => {
-    console.log('-----', option)
+    console.log('OPTION', option)
+    console.log('OPTION', option === 'category')
     if(option === 'category'){
       setTimeout(()=>{
         setIsShowModalCategory(true)
-      },1000)
+      },500)
     }
   }
 
