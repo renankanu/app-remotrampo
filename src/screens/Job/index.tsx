@@ -150,12 +150,10 @@ const Job: React.FC = () => {
   }, [requestCategories]);
 
   const validOptionSelected = (option: string | undefined) => {
-    console.log('OPTION', option)
-    console.log('OPTION', option === 'category')
     if(option === 'category'){
       setTimeout(()=>{
         setIsShowModalCategory(true)
-      },500)
+      },600)
     }
   }
 
@@ -169,8 +167,9 @@ const Job: React.FC = () => {
   },[options])
 
   useEffect(()=>{
-    setIsShowModalCategory(false)
-    console.log('000000', category)
+    if(category !== ''){
+      setIsShowModalCategory(false)
+    }
   },[category])
 
   return (
