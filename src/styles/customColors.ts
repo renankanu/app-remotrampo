@@ -9,6 +9,7 @@ const customColors = {
   transparent: '#FFFFFF00',
   transparent11: '#FFFFFF11',
   transparent55: '#FFFFFF55',
+  curiousBlue: '#1E96EB'
 };
 
 export default customColors;

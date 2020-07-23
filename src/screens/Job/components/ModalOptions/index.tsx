@@ -54,9 +54,10 @@ const ModalOptions: React.FC<IProps> = ({
           <Emoji name="mag_right" style={{ fontSize: 18 }} />
         </ContainerTitleModalOption>
         <Spacer height={28} />
-        {options.map(option => {
+        {options.map((option, index) => {
           return (
             <ButtonOption
+            key={index}
               onPress={() => {
                 onSubmit(option);
               }}

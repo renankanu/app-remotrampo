@@ -27,13 +27,12 @@ const ModalCategories: React.FC<IProps> = ({isLoading, categories}: IProps) => {
     <Container>
     <Title>Choose category</Title>
     <Spacer height={20}/>
-    {categories.map(category => {
+    {categories.map((category, index) => {
       return(
-        <ButtonSelect onPress={()=>{
+        <ButtonSelect key={index} onPress={()=>{
           dispatch(setCategory(category.slug))
         }}>
         <Label>{category.name}</Label>
-        <Spacer height={12}/>
         </ButtonSelect>
         )
       })}

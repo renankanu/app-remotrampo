@@ -18,11 +18,12 @@ export const Title = styled.Text`
 export const Label = styled.Text`
   font-size: 16px;
   color: ${customColors.white};
-  font-family: 'JosefinSans-Light';
+  font-family: 'JosefinSans-Regular';
 `;
 
 export const ButtonSelect = styled.TouchableOpacity`
-  background:${customColors.carnation};
-  justify-content: center;
+  border-radius: 20px;
+  padding: 12px;
+  background:${customColors.curiousBlue};
   margin-bottom: 10px;
 `;
