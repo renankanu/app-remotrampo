@@ -11,7 +11,7 @@ const INITIAL_STATE: optionState = {
     {
       id: 5,
       name: TypeSearch.all,
-      isSelected: false,
+      isSelected: true,
     },
     {
       id: 1,
