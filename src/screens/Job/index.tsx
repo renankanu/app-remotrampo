@@ -104,11 +104,14 @@ const Job: React.FC = () => {
   const callRequest = useCallback(async () => {
     console.log('TypeSearch', typeSearch);
     console.log('Search', search);
+    console.log('Category', category);
     if (typeSearch === TypeSearch.all) {
       await requestRemoteJobs(``);
       return;
     }
-    if (typeSearch === TypeSearch.category && search !== '') {
+    if (typeSearch === TypeSearch.category && category !== '') {
+      console.log('Cate', category)
+      await requestRemoteJobs(`?category=${category}`);
       return;
     }
     await requestRemoteJobs(``);
@@ -169,6 +172,7 @@ const Job: React.FC = () => {
   useEffect(()=>{
     if(category !== ''){
       setIsShowModalCategory(false)
+      requestRemoteJobs(`?category=${category}`);
     }
   },[category])
 
