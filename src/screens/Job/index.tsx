@@ -102,11 +102,8 @@ const Job: React.FC = () => {
   }, []);
 
   const callRequest = useCallback(async () => {
-    console.log('TypeSearch', typeSearch);
-    console.log('Search', search);
-    console.log('Category', category);
-    if (typeSearch === TypeSearch.all) {
-      await requestRemoteJobs(``);
+    if (typeSearch === TypeSearch.all && category !== '') {
+      await requestRemoteJobs(`?search=${category}`);
       return;
     }
     if (typeSearch === TypeSearch.category && category !== '') {
