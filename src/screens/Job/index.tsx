@@ -102,8 +102,8 @@ const Job: React.FC = () => {
   }, []);
 
   const callRequest = useCallback(async () => {
-    if (typeSearch === TypeSearch.all && category !== '') {
-      await requestRemoteJobs(`?search=${category}`);
+    if (typeSearch === TypeSearch.all && search !== '') {
+      await requestRemoteJobs(`?search=${search}`);
       return;
     }
     await requestRemoteJobs(``);
@@ -131,6 +131,12 @@ const Job: React.FC = () => {
   const selectOption = () => {
     setIsShowModalOption(false);
   };
+
+  useEffect(()=>{
+    if(search.trim() ===''){
+      callRequest()
+    }
+  },[search])
 
   useEffect(() => {
     if (typeSearch === TypeSearch.all) {
@@ -188,7 +194,6 @@ const Job: React.FC = () => {
           returnKeyType="search"
           onSubmitEditing={callRequest}
           onChangeText={text => {
-            console.log(text);
             setSearch(text);
           }}
           selectionColor={customColors.white}
