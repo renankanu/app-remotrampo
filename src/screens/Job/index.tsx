@@ -164,7 +164,9 @@ const Job: React.FC = () => {
   useEffect(()=>{
     if(category !== ''){
       setIsShowModalCategory(false)
-      requestRemoteJobs(`?category=${category}`);
+      setTimeout(()=>{
+        requestRemoteJobs(`?category=${category}`);
+      }, 600)
     }
   },[category])
 
