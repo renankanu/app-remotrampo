@@ -106,11 +106,6 @@ const Job: React.FC = () => {
       await requestRemoteJobs(`?search=${category}`);
       return;
     }
-    if (typeSearch === TypeSearch.category && category !== '') {
-      console.log('Cate', category)
-      await requestRemoteJobs(`?category=${category}`);
-      return;
-    }
     await requestRemoteJobs(``);
   }, [typeSearch, search, requestRemoteJobs]);
 
