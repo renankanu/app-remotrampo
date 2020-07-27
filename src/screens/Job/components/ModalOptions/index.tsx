@@ -36,8 +36,8 @@ const ModalOptions: React.FC<IProps> = ({
   return (
     <Modal
       isVisible={isShowModalOption}
-      animationIn="rubberBand"
-      animationOut="slideOutDown"
+      animationIn="bounceInUp"
+      animationOut="bounceOutDown"
       backdropOpacity={0.5}
       animationInTiming={500}
       animationOutTiming={500}

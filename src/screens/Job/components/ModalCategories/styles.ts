@@ -22,8 +22,11 @@ export const Label = styled.Text`
 `;
 
 export const ButtonSelect = styled.TouchableOpacity`
-  border-radius: 20px;
-  padding: 12px;
-  background:${customColors.curiousBlue};
+  border-radius: 12px;
+  justify-content: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 48px;
+  background:${customColors.carnation};
   margin-bottom: 10px;
 `;

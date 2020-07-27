@@ -31,6 +31,8 @@ import ModalCategories from './components/ModalCategories';
 import { categoryState } from '../../store/modules/category/types';
 import { Text } from 'react-native';
 import { NoDataMessage } from './styles';
+import { useDispatch } from 'react-redux';
+import { setCategory } from '../../store/modules/category/actions';
 
 export interface Job {
   id: string;
@@ -61,9 +63,9 @@ export interface Option {
 }
 
 enum TypeSearch {
-  all = 'all',
-  category = 'category',
-  company_name = 'company name',
+  all = 'All',
+  category = 'Category',
+  company_name = 'Company name',
 }
 
 const Job: React.FC = () => {
@@ -82,12 +84,14 @@ const Job: React.FC = () => {
   const [isShowModalCategory, setIsShowModalCategory] = useState<boolean>(false);
   const [typeSearch, setTypeSearch] = useState<TypeSearch>(TypeSearch.all);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const requestRemoteJobs = useCallback(async params => {
     setLoading(true);
     try {
       const response = await api.get(`${params}`);
       setJobData(response.data.jobs);
+      dispatch(setCategory(''))
     } catch (error) {
       Alert.alert(error);
     }
