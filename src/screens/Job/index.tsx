@@ -17,6 +17,7 @@ import {
   Category,
   RowFlex,
   InputSearch,
+  ContainerInput
 } from './styles';
 import api from '../../services/api';
 import { Spacer } from '../../styles/index';
@@ -24,7 +25,7 @@ import notFound from '../../assets/images/notFound.png';
 import customColors from '../../styles/customColors';
 import ModalLoading from './components/ModalLoading/index';
 import ModalOptions from './components/ModalOptions/index';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { optionState } from 'src/store/modules/option/types';
 import ModalCategories from './components/ModalCategories';
 import { categoryState } from '../../store/modules/category/types';
@@ -190,6 +191,7 @@ const Job: React.FC = () => {
       <ModalCategories isLoading={isShowModalCategory} categories={categories} />
 
       <ContainerSearch animation="fadeInDown">
+        <ContainerInput>
         <InputSearch
           returnKeyType="search"
           onSubmitEditing={callRequest}
@@ -201,6 +203,7 @@ const Job: React.FC = () => {
           value={search}
           placeholder="Search Job"
         />
+        </ContainerInput>
         <TouchableOpacity onPress={openModalOption}>
           <Icon name="filter" size={16} color={customColors.white} />
         </TouchableOpacity>

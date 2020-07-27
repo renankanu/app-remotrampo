@@ -10,14 +10,20 @@ export const Container = styled(SafeAreaView)`
 `;
 
 export const ContainerSearch = styled(Animatable.View)`
-  height: 48px;
   flex-direction: row;
-  padding: 0px 27px;
-  margin: 20px 10px 0px 10px;
   align-items: center;
+  margin: 20px 10px 0px 10px;
+`;
+
+export const ContainerInput = styled.View`
+  height: 48px;
+  flex: 1;
+  margin-right: 20px;
+  padding: 0px 27px;
   border-radius: 10px;
   background: ${customColors.shipGray};
 `;
+
 export const InputSearch = styled.TextInput`
   height: 100%;
   width: 100%;
