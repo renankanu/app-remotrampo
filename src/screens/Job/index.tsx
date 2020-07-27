@@ -74,6 +74,7 @@ const Job: React.FC = () => {
   const [jobData, setJobData] = useState<Job[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [search, setSearch] = useState<string>('');
+  const [placeholder, setPlaceholder] = useState<string>('Search ...');
   const [isLoading, setLoading] = useState<boolean>(false);
   const [isShowModalOption, setIsShowModalOption] = useState<boolean>(false);
   const [isShowModalCategory, setIsShowModalCategory] = useState<boolean>(false);
@@ -125,8 +126,8 @@ const Job: React.FC = () => {
 
   const getTypeOption = (name: string | undefined) => {
     for (const enumTypeSearch in TypeSearch) {
-      if (name === TypeSearch[enumTypeSearch as TypeSearch]) {
-        setTypeSearch(TypeSearch[enumTypeSearch as TypeSearch]);
+      if (name === Object(TypeSearch)[enumTypeSearch]) {
+        setTypeSearch(Object(TypeSearch)[enumTypeSearch]);
       }
     }
   };
@@ -154,14 +155,21 @@ const Job: React.FC = () => {
   }, [requestCategories]);
 
   const validOptionSelected = (option: string | undefined) => {
-    if(option === 'category'){
+    if(option === TypeSearch.all){
+      setPlaceholder('Search ...')
+    }
+    if(option === TypeSearch.category){
       setTimeout(()=>{
         setIsShowModalCategory(true)
       },600)
     }
+    if(option === TypeSearch.company_name){
+      setPlaceholder('Company name ...')
+    }
   }
 
   useEffect(()=>{
+    setSearch('')
     const option = options.find(option => {
       return option.isSelected
     })
@@ -203,7 +211,7 @@ const Job: React.FC = () => {
           selectionColor={customColors.white}
           placeholderTextColor={customColors.mischka}
           value={search}
-          placeholder="Search Job"
+          placeholder={placeholder}
         />
         </ContainerInput>
         <TouchableOpacity onPress={openModalOption}>
