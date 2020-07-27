@@ -61,9 +61,7 @@ export interface Option {
 enum TypeSearch {
   all = 'all',
   category = 'category',
-  tags = 'tags',
   company_name = 'company_name',
-  search = 'search',
 }
 
 const Job: React.FC = () => {

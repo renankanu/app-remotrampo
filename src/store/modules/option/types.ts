@@ -11,9 +11,7 @@ export interface optionState {
 export enum TypeSearch {
   all = 'all',
   category = 'category',
-  tags = 'tags',
-  company_name = 'company_name',
-  search = 'search',
+  company_name = 'company name',
 }
 
 export const SELECT_OPTION = '@option/SELECT_OPTION';

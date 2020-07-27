@@ -19,18 +19,8 @@ const INITIAL_STATE: optionState = {
       isSelected: false,
     },
     {
-      id: 2,
-      name: TypeSearch.tags,
-      isSelected: false,
-    },
-    {
       id: 3,
       name: TypeSearch.company_name,
-      isSelected: false,
-    },
-    {
-      id: 4,
-      name: TypeSearch.search,
       isSelected: false,
     },
   ],
