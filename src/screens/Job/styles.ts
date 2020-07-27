@@ -9,6 +9,19 @@ export const Container = styled(SafeAreaView)`
   flex: 1;
 `;
 
+export const ContainerNoData = styled.View`
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const NoDataMessage = styled.Text`
+  font-size: 16px;
+  color: ${customColors.white};
+  font-family: 'JosefinSans-Medium';
+`;
+
 export const ContainerSearch = styled(Animatable.View)`
   flex-direction: row;
   align-items: center;

@@ -3,7 +3,6 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Alert, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useNavigation } from '@react-navigation/native';
-import Modal from 'react-native-modal';
 import Emoji from 'react-native-emoji';
 import {
   Container,
@@ -17,7 +16,8 @@ import {
   Category,
   RowFlex,
   InputSearch,
-  ContainerInput
+  ContainerInput,
+  ContainerNoData
 } from './styles';
 import api from '../../services/api';
 import { Spacer } from '../../styles/index';
@@ -29,6 +29,8 @@ import { useSelector } from 'react-redux';
 import { optionState } from 'src/store/modules/option/types';
 import ModalCategories from './components/ModalCategories';
 import { categoryState } from '../../store/modules/category/types';
+import { Text } from 'react-native';
+import { NoDataMessage } from './styles';
 
 export interface Job {
   id: string;
@@ -219,7 +221,8 @@ const Job: React.FC = () => {
         </TouchableOpacity>
       </ContainerSearch>
       <Spacer height={10} />
-      <JogList
+      {jobData.length > 0 ? (
+        <JogList
         data={jobData}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
@@ -252,6 +255,13 @@ const Job: React.FC = () => {
           </ContainerJob>
         )}
       />
+      ) : (
+        <ContainerNoData>
+          <NoDataMessage>Try again ...</NoDataMessage>
+          <Spacer width={8}/>
+          <Emoji name="grimacing" style={{ fontSize: 18 }} />
+        </ContainerNoData>
+      )}
     </Container>
   );
 };
