@@ -29,6 +29,8 @@ import notFound from '../../assets/images/notFound.png';
 import { Spacer } from '../../styles/index';
 import { tagsStyles } from './tagHtmlStyles';
 import customColors from '../../styles/customColors';
+import { Text } from 'react-native';
+import { View } from 'react-native';
 
 interface Job {
   id: string;
@@ -152,6 +154,18 @@ const JobDetails: React.FC = () => {
             'margin-bottom',
             'background-color',
           ]}
+          listsPrefixesRenderers={{
+            ul: (_htmlAttribs, _children, _convertedCSSStyles, passProps) => {
+              return <View style={{
+                marginRight: 10,
+                width: 12 / 2.8,
+                height: 12 / 2.8,
+                marginTop: 12 / 2,
+                borderRadius: 12 / 2.8,
+                backgroundColor: customColors.carnation,
+              }}/>
+            },
+          }}
           baseFontStyle={{ fontFamily: 'JosefinSans-Light' }}
           imagesMaxWidth={Dimensions.get('window').width - 48}
           onLinkPress={(object, href) => {

@@ -12,6 +12,10 @@ export const tagsStyles = {
     color: customColors.white,
     marginTop: 10,
   },
+  a: {
+    color: customColors.carnation,
+    marginTop: 10,
+  },
   h1: {
     color: customColors.white,
     marginTop: 10,
@@ -24,7 +28,7 @@ export const tagsStyles = {
     color: customColors.white,
   },
   ol: {
-    color: customColors.white,
+    color: customColors.carnation,
   },
   ul: {
     color: customColors.white,
