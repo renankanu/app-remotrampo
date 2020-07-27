@@ -80,6 +80,7 @@ const Job: React.FC = () => {
   const [search, setSearch] = useState<string>('');
   const [placeholder, setPlaceholder] = useState<string>('Search ...');
   const [isLoading, setLoading] = useState<boolean>(false);
+  const [isSearchEditable, setIsSearchEditable] = useState<boolean>(true);
   const [isShowModalOption, setIsShowModalOption] = useState<boolean>(false);
   const [isShowModalCategory, setIsShowModalCategory] = useState<boolean>(false);
   const [typeSearch, setTypeSearch] = useState<TypeSearch>(TypeSearch.all);
@@ -162,14 +163,18 @@ const Job: React.FC = () => {
 
   const validOptionSelected = (option: string | undefined) => {
     if(option === TypeSearch.all){
+      setIsSearchEditable(true);
       setPlaceholder('Search ...')
     }
     if(option === TypeSearch.category){
+      setIsSearchEditable(false);
+      setPlaceholder('Category selected')
       setTimeout(()=>{
         setIsShowModalCategory(true)
       },600)
     }
     if(option === TypeSearch.company_name){
+      setIsSearchEditable(true);
       setPlaceholder('Company name ...')
     }
   }
@@ -209,6 +214,7 @@ const Job: React.FC = () => {
       <ContainerSearch animation="fadeInDown">
         <ContainerInput>
         <InputSearch
+          editable={isSearchEditable}
           returnKeyType="search"
           onSubmitEditing={callRequest}
           onChangeText={text => {
