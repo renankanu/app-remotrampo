@@ -27,6 +27,7 @@ export const ContainerInput = styled.View`
 export const InputSearch = styled.TextInput`
   height: 100%;
   width: 100%;
+  color: ${customColors.mischka};
 `;
 
 export const ContainerJob = styled.TouchableOpacity`

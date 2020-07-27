@@ -61,7 +61,7 @@ export interface Option {
 enum TypeSearch {
   all = 'all',
   category = 'category',
-  company_name = 'company_name',
+  company_name = 'company name',
 }
 
 const Job: React.FC = () => {
@@ -103,6 +103,10 @@ const Job: React.FC = () => {
   const callRequest = useCallback(async () => {
     if (typeSearch === TypeSearch.all && search !== '') {
       await requestRemoteJobs(`?search=${search}`);
+      return;
+    }
+    if (typeSearch === TypeSearch.company_name && search !== '') {
+      await requestRemoteJobs(`?company_name=${search}`);
       return;
     }
     await requestRemoteJobs(``);
