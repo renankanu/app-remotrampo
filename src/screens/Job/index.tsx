@@ -214,6 +214,7 @@ const Job: React.FC = () => {
       <ContainerSearch animation="fadeInDown">
         <ContainerInput>
         <InputSearch
+          autoCorrect={false}
           editable={isSearchEditable}
           returnKeyType="search"
           onSubmitEditing={callRequest}
