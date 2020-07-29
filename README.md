@@ -1,2 +1,2 @@
-[![licence mit](https://img.shields.io/github/license/renankanu/gather-pets)](https://github.com/renankanu/gather-pets/blob/master/LICENSE)
+[![licence mit](https://img.shields.io/badge/license-MIT-green)](https://github.com/renankanu/app-remotrampo/blob/master/LICENSE)
 # app-remotrampo
