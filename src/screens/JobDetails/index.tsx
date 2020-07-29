@@ -82,7 +82,9 @@ const JobDetails: React.FC = () => {
         </TitleHeaderContainer>
         <BackButton />
       </Header>
-      <ScrollView>
+      <ScrollView
+      showsVerticalScrollIndicator={false}
+      >
         <ContainerCenter>
           <CompanyImage
             resizeMode="contain"
