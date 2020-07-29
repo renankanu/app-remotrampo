@@ -57,6 +57,7 @@ const ModalOptions: React.FC<IProps> = ({
         {options.map((option, index) => {
           return (
             <ButtonOption
+            isSelected={option.isSelected}
             key={index}
               onPress={() => {
                 onSubmit(option);

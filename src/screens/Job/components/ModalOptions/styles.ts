@@ -1,6 +1,10 @@
 import styled from 'styled-components/native';
 import customColors from '../../../../styles/customColors';
 
+interface IProps {
+  isSelected: boolean
+}
+
 export const ContainerOption = styled.View`
   padding: 30px 20px 20px 20px;
   width: 100%;
@@ -26,7 +30,7 @@ export const LabelOption = styled.Text`
   font-family: 'JosefinSans-Medium';
 `;
 
-export const ButtonOption = styled.TouchableOpacity`
+export const ButtonOption = styled.TouchableOpacity<IProps>`
   margin: 0px 10px 10px 10px;
   flex-direction: row;
   justify-content: space-between;
@@ -35,5 +39,7 @@ export const ButtonOption = styled.TouchableOpacity`
   padding-right: 20px;
   height: 48px;
   border-radius: 12px;
-  background: ${customColors.carnation};
+  border-width: ${props => props.isSelected ? '3px' : '0px'};
+  border-color: ${props => props.isSelected ? customColors.carnation : customColors.transparent};
+  background: ${props => props.isSelected ? customColors.transparent : customColors.carnation};
 `;
