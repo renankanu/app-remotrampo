@@ -8,17 +8,21 @@ export const Container = styled.View`
   justify-content: center;
 `;
 
-export const Title = styled.Text`
+export const Title = styled(Animatable.Text)`
   font-size: 32px;
   color: ${customColors.mischka};
   font-family: 'JosefinSans-Medium';
 `;
 
-export const Description = styled.Text`
+export const Description = styled(Animatable.Text)`
   font-size: 18px;
   color: ${customColors.mischka};
   font-family: 'JosefinSans-Regular';
 `;
+
+export const AnimatableContainerButton = styled(Animatable.View)`
+
+`
 
 export const ContainerButton11 = styled.TouchableOpacity`
   padding: 0px 12px;

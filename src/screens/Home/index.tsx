@@ -9,6 +9,7 @@ import {
   ContainerButton55,
   ContainerButtonHome,
   Logo,
+  AnimatableContainerButton,
 } from './styles';
 import { Spacer } from '../../styles';
 import home from '../../assets/images/home.png';
@@ -22,12 +23,13 @@ const Home: React.FC = () => {
 
   return (
     <Container>
-      <Title>RemoTrampo</Title>
+      <Title useNativeDriver animation="fadeInRight">RemoTrampo</Title>
       <Spacer height={10} />
-      <Description>Is the easiest to find a job remotely for you</Description>
+      <Description useNativeDriver animation="fadeInRight" delay={500}>Is the easiest to find a job remotely for you</Description>
       <Spacer height={60} />
       <Logo source={home} animation="rubberBand" />
       <Spacer height={60} />
+      <AnimatableContainerButton useNativeDriver animation="fadeInRight" delay={1000}>
       <ContainerButton11 onPress={callJobScreen}>
         <ContainerButton55>
           <ContainerButtonHome>
@@ -35,6 +37,7 @@ const Home: React.FC = () => {
           </ContainerButtonHome>
         </ContainerButton55>
       </ContainerButton11>
+      </AnimatableContainerButton>
     </Container>
   );
 };
