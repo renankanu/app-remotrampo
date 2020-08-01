@@ -89,7 +89,7 @@ export const Category = styled.Text`
   font-family: 'JosefinSans-Light';
 `;
 
-export const JogList = styled(FlatList as new () => FlatList<Job>)``;
+export const JobList = styled(FlatList as new () => FlatList<Job>)``;
 
 export const Logo = styled(Animatable.Image)`
   border-radius: 100px;

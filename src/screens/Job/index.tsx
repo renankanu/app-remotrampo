@@ -7,7 +7,7 @@ import Emoji from 'react-native-emoji';
 import {
   Container,
   ContainerSearch,
-  JogList,
+  JobList,
   ContainerJob,
   ImageJob,
   ContainerDescJob,
