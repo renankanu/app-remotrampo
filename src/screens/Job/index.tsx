@@ -233,7 +233,7 @@ const Job: React.FC = () => {
       </ContainerSearch>
       <Spacer height={10} />
       {jobData.length > 0 ? (
-        <JogList
+        <JobList
         showsVerticalScrollIndicator={false}
         data={jobData}
         keyExtractor={(item, index) => index.toString()}
