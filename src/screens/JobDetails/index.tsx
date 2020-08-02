@@ -145,6 +145,7 @@ const JobDetails: React.FC = () => {
         )}
         <Spacer height={24} />
         <Label>Description</Label>
+
         <HTML
           html={job.item.description}
           tagsStyles={tagsStyles}
