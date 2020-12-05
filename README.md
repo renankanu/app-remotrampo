@@ -19,10 +19,4 @@ API used in the project: https://remotive.io/api-documentation
   <img alt="Remotrampo" title="#screen" width="250px" src="./print/print05.png" />
  </div>
 
-##### 👊Contribute
-
-- Create branch: `git checkout -b my-feature`
-- Commit your changes: `git commit -m 'feat: Hello my feature '`
-- Push: `git push origin my-feature`
-
 ---
