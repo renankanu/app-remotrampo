@@ -6,9 +6,7 @@
 
 <h1 align="center">Remotrampo  </h1>
 
-### Description
-APP created to search for remote jobs, this app was created for study purposes, using Typescript and styled-components
-API used in the project: https://remotive.io/api-documentation
+### Descricão: APP criado para busca de empregos remotos, este aplicativo foi criado para fins de estudo, usando Typescript e API de componentes estilizados usados ​​no projeto: https://remotive.io/api-documentation
 
 #### 📷 Prints
 <div align="center" styles="flex-direction: row;">
